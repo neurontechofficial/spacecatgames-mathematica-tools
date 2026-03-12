@@ -1,0 +1,380 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     13061,        357]
+NotebookOptionsPosition[     13297,        351]
+NotebookOutlinePosition[     13689,        367]
+CellTagsIndexPosition[     13646,        364]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Published", " ", "CSV", " ", "link"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "sheetURL", 
+     "=", "\"\<https://docs.google.com/spreadsheets/d/e/2PACX-1vTf-\
+6AlCge2OKAs4JuAPi5cPtJWmGqjMy27zGyTheWlWiToV4MxwCel0E_YiMiK11QpF69v-EW8bi78/\
+pub?output=csv\>\""}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Import", " ", "the", " ", "data"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"data", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"sheetURL", ",", "\"\<CSV\>\""}], "]"}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Separate", " ", "headers", " ", "and", " ", "values"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"values", "=", 
+     RowBox[{"Rest", "[", "data", "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Clean", " ", "and", " ", "convert", " ", "total", " ", "plays", " ", 
+      "to", " ", "numbers"}], ",", 
+     RowBox[{
+      RowBox[{"replace", " ", 
+       RowBox[{"missing", "/", "non"}]}], "-", 
+      RowBox[{"numeric", " ", "with", " ", "0"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"cleanValues", "=", 
+     RowBox[{"values", "/.", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"title_", ",", "count_"}], "}"}], ":>", 
+       RowBox[{"{", 
+        RowBox[{"title", ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringQ", "[", "count", "]"}], "&&", 
+            RowBox[{"StringMatchQ", "[", 
+             RowBox[{"count", ",", "NumberString"}], "]"}]}], ",", 
+           RowBox[{"ToExpression", "[", "count", "]"}], ",", "0"}], "]"}]}], 
+        "}"}]}]}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "How", " ", "many", " ", "top", " ", "games", " ", "to", " ", "show"}], 
+    "*)"}], 
+   RowBox[{
+    RowBox[{"topN", "=", "20"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Sort", " ", "cleanValues", " ", "descending", " ", "by", " ", "total", " ",
+      "plays"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sortedValues", "=", 
+     RowBox[{"Reverse", "@", 
+      RowBox[{"SortBy", "[", 
+       RowBox[{"cleanValues", ",", "Last"}], "]"}]}]}], ";"}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Take", " ", "top", " ", "N", " ", "games"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"topGames", "=", 
+     RowBox[{"sortedValues", "[", 
+      RowBox[{"[", 
+       RowBox[{";;", 
+        RowBox[{"Min", "[", 
+         RowBox[{"topN", ",", 
+          RowBox[{"Length", "[", "sortedValues", "]"}]}], "]"}]}], "]"}], 
+      "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "3", "D", " ", "bar", " ", "chart", " ", "with", " ", "tooltips"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Graphics3D", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Tooltip", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"ColorData", "[", "\"\<Pastel\>\"", "]"}], "[", 
+            RowBox[{"i", "/", 
+             RowBox[{"Length", "[", "topGames", "]"}]}], "]"}], ",", 
+           RowBox[{"Cuboid", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "0", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"i", "+", "0.8"}], ",", "1", ",", 
+               RowBox[{"topGames", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+          "}"}], ",", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"topGames", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "\"\<: \>\"", ",", 
+            RowBox[{"topGames", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}]}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "topGames", "]"}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"Axes", "->", "True"}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Rank\>\"", ",", "\"\<\>\"", ",", "\"\<Total Plays\>\""}], 
+       "}"}]}], ",", 
+     RowBox[{"Boxed", "->", "False"}], ",", 
+     RowBox[{
+     "PlotLabel", "->", "\"\<Top Played Games (3D with Tooltips)\>\""}], ",", 
+     
+     RowBox[{"ImageSize", "->", "Large"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.982298747721446*^9, 3.982298750206334*^9}},
+ CellLabel->"In[90]:=",ExpressionUUID->"acfb6d2f-1756-4aaf-823a-48ae595b1120"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.7882138000000001, 0.5339643, 0.9475666], 
+      CuboidBox[{1, 0, 0}, {1.8, 1, Missing["NotAvailable"]}]},
+     TemplateBox[{
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}], "\": \"", 
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}, "RowDefault"]],
+    Annotation[#, 
+     Row[{
+       Missing["NotAvailable"], ": ", 
+       Missing["NotAvailable"]}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.8153769000000001, 0.5918221, 0.9351216], 
+      CuboidBox[{2, 0, 0}, {2.8, 1, Missing["NotAvailable"]}]},
+     TemplateBox[{
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}], "\": \"", 
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}, "RowDefault"]],
+    Annotation[#, 
+     Row[{
+       Missing["NotAvailable"], ": ", 
+       Missing["NotAvailable"]}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.84662735, 0.62594465, 0.8353109000000001], 
+      CuboidBox[{3, 0, 0}, {3.8, 1, Missing["NotAvailable"]}]},
+     TemplateBox[{
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}], "\": \"", 
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}, "RowDefault"]],
+    Annotation[#, 
+     Row[{
+       Missing["NotAvailable"], ": ", 
+       Missing["NotAvailable"]}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.8750956, 0.6580038, 0.746929], 
+      CuboidBox[{4, 0, 0}, {4.8, 1, Missing["NotAvailable"]}]},
+     TemplateBox[{
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}], "\": \"", 
+       RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}, "RowDefault"]],
+    Annotation[#, 
+     Row[{
+       Missing["NotAvailable"], ": ", 
+       Missing["NotAvailable"]}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.898695, 0.686452, 0.6785475], 
+      CuboidBox[{5, 0, 0}, {5.8, 1, 33}]},
+     TemplateBox[{"\"Wordle\"", "\": \"", "33"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Wordle", ": ", 33}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9177137, 0.7189139, 0.632918], 
+      CuboidBox[{6, 0, 0}, {6.8, 1, 4}]},
+     TemplateBox[{"\"Waterworks!\"", "\": \"", "4"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Waterworks!", ": ", 4}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.93291515, 0.75472055, 0.6062485], 
+      CuboidBox[{7, 0, 0}, {7.8, 1, 37}]},
+     TemplateBox[{"\"Warfare Area 3\"", "\": \"", "37"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Warfare Area 3", ": ", 37}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9440982, 0.7955892, 0.5942686], 
+      CuboidBox[{8, 0, 0}, {8.8, 1, 18}]},
+     TemplateBox[{"\"Twisted Rope 3D\"", "\": \"", "18"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Twisted Rope 3D", ": ", 18}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.95377435, 0.8383560999999999, 0.5877973], 
+      CuboidBox[{9, 0, 0}, {9.8, 1, 33}]},
+     TemplateBox[{"\"Tunnel Rush\"", "\": \"", "33"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Tunnel Rush", ": ", 33}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9584254999999999, 0.877884, 0.5906629999999999], 
+      CuboidBox[{10, 0, 0}, {10.8, 1, 14}]},
+     TemplateBox[{"\"Tug of War with Cars\"", "\": \"", "14"}, "RowDefault"]],
+    
+    Annotation[#, 
+     Row[{"Tug of War with Cars", ": ", 14}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9614961, 0.91551275, 0.59611555], 
+      CuboidBox[{11, 0, 0}, {11.8, 1, 56}]},
+     TemplateBox[{"\"Truck Space 2\"", "\": \"", "56"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Truck Space 2", ": ", 56}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9537862, 0.937389, 0.6180996], 
+      CuboidBox[{12, 0, 0}, {12.8, 1, 2}]},
+     TemplateBox[{"\"Touhou: Luminous Strike\"", "\": \"", "2"}, 
+      "RowDefault"]],
+    Annotation[#, 
+     Row[{"Touhou: Luminous Strike", ": ", 2}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.93962135, 0.95196745, 0.6479153], 
+      CuboidBox[{13, 0, 0}, {13.8, 1, 3}]},
+     TemplateBox[{"\"Tomodatchi Collection\"", "\": \"", "3"}, "RowDefault"]],
+    
+    Annotation[#, 
+     Row[{"Tomodatchi Collection", ": ", 3}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.9082433, 0.9470851, 0.6986154], 
+      CuboidBox[{14, 0, 0}, {14.8, 1, 51}]},
+     TemplateBox[{"\"Time Shooter 3\"", "\": \"", "51"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Time Shooter 3", ": ", 51}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.86116075, 0.930182, 0.758764], 
+      CuboidBox[{15, 0, 0}, {15.8, 1, 34}]},
+     TemplateBox[{"\"The Typing Game\"", "\": \"", "34"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"The Typing Game", ": ", 34}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.7952328000000001, 0.8988539999999999, 0.8302508], 
+      CuboidBox[{16, 0, 0}, {16.8, 1, 28}]},
+     TemplateBox[{"\"There is no game\"", "\": \"", "28"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"There is no game", ": ", 28}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.7093989500000001, 0.85733015, 0.89098455], 
+      CuboidBox[{17, 0, 0}, {17.8, 1, 26}]},
+     TemplateBox[{
+      "\"\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8\"", 
+       "\": \"", "26"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{
+      "\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8", ": ", 
+       26}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.6121903000000001, 0.8099801000000001, 0.9455737], 
+      CuboidBox[{18, 0, 0}, {18.8, 1, 14}]},
+     TemplateBox[{"\"The Bauble Factory\"", "\": \"", "14"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"The Bauble Factory", ": ", 14}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.5210670000000001, 0.7601519, 0.9427091], 
+      CuboidBox[{19, 0, 0}, {19.8, 1, 50}]},
+     TemplateBox[{"\"Tetris\"", "\": \"", "50"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Tetris", ": ", 50}], "Tooltip"]& ], 
+   TagBox[
+    TooltipBox[
+     {RGBColor[0.431296, 0.709773, 0.927077], 
+      CuboidBox[{20, 0, 0}, {20.8, 1, 9}]},
+     TemplateBox[{"\"Terraria\"", "\": \"", "9"}, "RowDefault"]],
+    Annotation[#, 
+     Row[{"Terraria", ": ", 9}], "Tooltip"]& ]},
+  Axes->True,
+  AxesLabel->{
+    FormBox["\"Rank\"", TraditionalForm], 
+    FormBox["\"\"", TraditionalForm], 
+    FormBox["\"Total Plays\"", TraditionalForm]},
+  Boxed->False,
+  ImageSize->Large,
+  PlotLabel->FormBox[
+   "\"Top Played Games (3D with Tooltips)\"", TraditionalForm]]], "Output",
+ CellChangeTimes->{3.982298753506124*^9},
+ CellLabel->"Out[97]=",ExpressionUUID->"f47dcf4b-75f1-4080-ad2c-c1e63fb312d8"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.982298781444049*^9, 3.982298783635139*^9}},
+ NumberMarks->False,ExpressionUUID->"2b8e4bfa-c4d3-4383-aead-020af4909dc3"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9822987782681828`*^9, 
+  3.982298778271202*^9}},ExpressionUUID->"bc545ee8-4886-4afd-b322-\
+a635b054a536"]
+},
+WindowSize->{1440, 754.5},
+WindowMargins->{{Automatic, 960}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a6306d64-6bb2-4e86-b500-a8b5374fdba9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 4786, 127, 494, "Input",ExpressionUUID->"acfb6d2f-1756-4aaf-823a-48ae595b1120"],
+Cell[6271, 164, 6682, 175, 756, "Output",ExpressionUUID->"f47dcf4b-75f1-4080-ad2c-c1e63fb312d8"]
+}, Open  ]],
+Cell[12968, 342, 168, 2, 29, "Input",ExpressionUUID->"2b8e4bfa-c4d3-4383-aead-020af4909dc3"],
+Cell[13139, 346, 154, 3, 29, "Input",ExpressionUUID->"bc545ee8-4886-4afd-b322-a635b054a536"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
