@@ -23,10 +23,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[      1060,         20]
-NotebookDataLength[     25974,        687]
-NotebookOptionsPosition[     26012,        679]
-NotebookOutlinePosition[     26404,        695]
-CellTagsIndexPosition[     26361,        692]
+NotebookDataLength[     96645,       1984]
+NotebookOptionsPosition[     96992,       1979]
+NotebookOutlinePosition[     97459,       1996]
+CellTagsIndexPosition[     97416,       1993]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -45,7 +45,7 @@ Cell[BoxData[
 6AlCge2OKAs4JuAPi5cPtJWmGqjMy27zGyTheWlWiToV4MxwCel0E_YiMiK11QpF69v-EW8bi78/\
 pub?output=csv\>\""}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"Import", " ", "data"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Import", " ", "the", " ", "data"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"data", "=", 
      RowBox[{"Import", "[", 
@@ -54,16 +54,13 @@ pub?output=csv\>\""}], ";"}], "\n", "\[IndentingNewLine]",
    RowBox[{"(*", 
     RowBox[{"Separate", " ", "headers", " ", "and", " ", "values"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"headers", "=", 
-     RowBox[{"First", "[", "data", "]"}]}], ";"}], "\n", 
-   RowBox[{
     RowBox[{"values", "=", 
      RowBox[{"Rest", "[", "data", "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{
-     "Convert", " ", "total", " ", "plays", " ", "to", " ", "numbers"}], ",", 
-     
+     "Clean", " ", "and", " ", "convert", " ", "total", " ", "plays", " ", 
+      "to", " ", "numbers"}], ",", 
      RowBox[{
       RowBox[{"replace", " ", 
        RowBox[{"missing", "/", "non"}]}], "-", 
@@ -85,9 +82,8 @@ pub?output=csv\>\""}], ";"}], "\n", "\[IndentingNewLine]",
            RowBox[{"ToExpression", "[", "count", "]"}], ",", "0"}], "]"}]}], 
         "}"}]}]}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", 
-    RowBox[{"Optional", ":", 
-     RowBox[{
-     "sort", " ", "descending", " ", "by", " ", "total", " ", "plays"}]}], 
+    RowBox[{
+    "Sort", " ", "descending", " ", "by", " ", "total", " ", "plays"}], 
     "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"cleanValues", "=", 
@@ -97,564 +93,1866 @@ pub?output=csv\>\""}], ";"}], "\n", "\[IndentingNewLine]",
    "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-    "Show", " ", "top", " ", "N", " ", "games", " ", "for", " ", 
-     "readability"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"topN", "=", "20"}], ";"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{"BarChart", "[", 
+    "Build", " ", "BubbleChart", " ", "with", " ", "hover", " ", "tooltips"}],
+     "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"BubbleChart", "[", 
     RowBox[{
-     RowBox[{"cleanValues", "[", 
-      RowBox[{"[", 
-       RowBox[{
-        RowBox[{";;", 
-         RowBox[{"Min", "[", 
-          RowBox[{"topN", ",", 
-           RowBox[{"Length", "[", "cleanValues", "]"}]}], "]"}]}], ",", "2"}],
-        "]"}], "]"}], ",", 
-     RowBox[{"ChartLabels", "->", 
-      RowBox[{"Placed", "[", 
-       RowBox[{
-        RowBox[{"cleanValues", "[", 
-         RowBox[{"[", 
-          RowBox[{
-           RowBox[{";;", 
-            RowBox[{"Min", "[", 
-             RowBox[{"topN", ",", 
-              RowBox[{"Length", "[", "cleanValues", "]"}]}], "]"}]}], ",", 
-           "1"}], "]"}], "]"}], ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Tooltip", "[", 
         RowBox[{
-         RowBox[{"Rotate", "[", 
-          RowBox[{"#", ",", 
-           RowBox[{"45", " ", "Degree"}]}], "]"}], "&"}]}], "]"}]}], ",", 
-     RowBox[{"PlotLabel", "->", "\"\<Top Games by Total Plays\>\""}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"cleanValues", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+           RowBox[{"cleanValues", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"cleanValues", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "\"\<: \>\"", ",", 
+            RowBox[{"cleanValues", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}]}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "cleanValues", "]"}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"PlotLabel", "->", "\"\<Total Plays per Game\>\""}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Game Index\>\"", ",", "\"\<Total Plays\>\""}], "}"}]}], ",", 
      RowBox[{"ImageSize", "->", "Large"}], ",", 
-     RowBox[{"ChartStyle", "->", "\"\<Pastel\>\""}], ",", 
-     RowBox[{"BarSpacing", "->", "0.5"}]}], "]"}]}]}]], "Input",
+     RowBox[{"ChartStyle", "->", "\"\<Pastel\>\""}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.9822976281559467`*^9, 3.982297713128426*^9}, {
   3.982297825606906*^9, 3.982297858296075*^9}, {3.9822978927840977`*^9, 
   3.982297893111309*^9}, {3.982297937198814*^9, 3.982297956632698*^9}, {
   3.9822979891149054`*^9, 3.982297989428384*^9}, {3.982298050001075*^9, 
-  3.982298050221529*^9}},
- CellLabel->"In[50]:=",ExpressionUUID->"f825ff6c-a8ed-4515-b899-a7296c9710b1"],
-
-Cell[BoxData[
- TemplateBox[{
-  "Placed", "labpos", 
-   "\"\\!\\(\\*RowBox[{\\\"Placed\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
-RowBox[{RowBox[{\\\"Missing\\\", \\\"[\\\", \
-\\\"\\\\\\\"NotAvailable\\\\\\\"\\\", \\\"]\\\"}], \\\",\\\", \
-RowBox[{\\\"Missing\\\", \\\"[\\\", \\\"\\\\\\\"NotAvailable\\\\\\\"\\\", \
-\\\"]\\\"}], \\\",\\\", RowBox[{\\\"Missing\\\", \\\"[\\\", \
-\\\"\\\\\\\"NotAvailable\\\\\\\"\\\", \\\"]\\\"}], \\\",\\\", \
-RowBox[{\\\"Missing\\\", \\\"[\\\", \\\"\\\\\\\"NotAvailable\\\\\\\"\\\", \
-\\\"]\\\"}], \\\",\\\", \\\"\\\\\\\"Wordle\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\
-\"Waterworks!\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Warfare Area 3\\\\\\\"\\\", \
-\\\",\\\", \\\"\\\\\\\"Twisted Rope 3D\\\\\\\"\\\", \\\",\\\", \
-\\\"\\\\\\\"Tunnel Rush\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Tug of War with \
-Cars\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Truck Space 2\\\\\\\"\\\", \
-\\\",\\\", \\\"\\\\\\\"Touhou: Luminous Strike\\\\\\\"\\\", \\\",\\\", \\\"\\\
-\\\\\"Tomodatchi Collection\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Time Shooter \
-3\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"The Typing Game\\\\\\\"\\\", \\\",\\\", \
-\\\"\\\\\\\"There is no game\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"\|01f911\
-\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8\\\\\\\"\\\", \\\",\\\", \\\
-\"\\\\\\\"The Bauble Factory\\\\\\\"\\\", \\\",\\\", \\\"\\\\\\\"Tetris\\\\\\\
-\"\\\", \\\",\\\", \\\"\\\\\\\"Terraria\\\\\\\"\\\"}], \\\"}\\\"}], \
-\\\",\\\", RowBox[{RotationBox[\\\"#1\\\", Rule[BoxRotation, \
-0.7853981633974483`]], \\\"&\\\"}]}], \\\"]\\\"}]\\) is not a valid position \
-for the placement of labels.\"", 2, 57, 13, 22401390050087428980, "Local"},
-  "MessageTemplate",
-  BaseStyle->"MSG"]], "Message",
- CellChangeTimes->{3.982297959180559*^9, 3.982297992492053*^9, 
-  3.9822980524669724`*^9},
- CellLabel->
-  "During evaluation of \
-In[50]:=",ExpressionUUID->"b9152461-1019-4fa9-9fea-f7ba88673003"],
-
-Cell[BoxData[
- TemplateBox[{
-  "Placed", "labpos", 
-   "\"\\!\\(\\*RowBox[{RotationBox[\\\"#1\\\", Rule[BoxRotation, \
-0.7853981633974483`]], \\\"&\\\"}]\\) is not a valid position for the \
-placement of labels.\"", 2, 57, 14, 22401390050087428980, "Local"},
-  "MessageTemplate",
-  BaseStyle->"MSG"]], "Message",
- CellChangeTimes->{3.982297959180559*^9, 3.982297992492053*^9, 
-  3.982298052501346*^9},
- CellLabel->
-  "During evaluation of \
-In[50]:=",ExpressionUUID->"787be288-e6ed-4564-8bbb-656e1f170043"],
-
-Cell[BoxData[
- TemplateBox[{
-  "Placed", "labpos", 
-   "\"\\!\\(\\*RowBox[{RotationBox[\\\"#1\\\", Rule[BoxRotation, \
-0.7853981633974483`]], \\\"&\\\"}]\\) is not a valid position for the \
-placement of labels.\"", 2, 57, 15, 22401390050087428980, "Local"},
-  "MessageTemplate",
-  BaseStyle->"MSG"]], "Message",
- CellChangeTimes->{3.982297959180559*^9, 3.982297992492053*^9, 
-  3.982298052506262*^9},
- CellLabel->
-  "During evaluation of \
-In[50]:=",ExpressionUUID->"807d4952-6e72-416d-bc82-3c6483d6da2e"],
-
-Cell[BoxData[
- TemplateBox[{
-  "General", "stop", 
-   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Placed\\\", \\\"::\\\", \
-\\\"labpos\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
-calculation.\"", 2, 57, 16, 22401390050087428980, "Local"},
-  "MessageTemplate",
-  BaseStyle->"MSG"]], "Message",
- CellChangeTimes->{3.982297959180559*^9, 3.982297992492053*^9, 
-  3.9822980525109377`*^9},
- CellLabel->
-  "During evaluation of \
-In[50]:=",ExpressionUUID->"10dcce8e-a752-44c2-bedf-e56a98614d9a"],
+  3.982298050221529*^9}, {3.982298137787983*^9, 3.9822981424386177`*^9}},
+ CellLabel->"In[58]:=",ExpressionUUID->"f825ff6c-a8ed-4515-b899-a7296c9710b1"],
 
 Cell[BoxData[
  GraphicsBox[{
-   {Opacity[0], 
-    PointBox[{{0.27333333333333326`, 0.}, {20.333333333333336`, 0.}}]}, {{}, 
-    {RGBColor[1., 0.78, 0.2], EdgeForm[{GrayLevel[0], Opacity[
-     0.5599999999999999], Thickness[Small]}], {}, {}, {}, {}, 
-     {RGBColor[0.8800638947368421, 0.6639928947368421, 0.7325328947368421], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{4.666666666666667, 0.}, {5.333333333333334, 33.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{132.8513287262811, 
-            151.21216199278814`}, {-20.582817990734497`, 173.3250172072687}}],
-          
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 33]& ,
-         TagBoxNote->"33"],
-        StyleBox["33", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[33, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9049053684210526, 0.6939383684210526, 0.6605523684210526], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{5.666666666666667, 0.}, {6.333333333333334, 4.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{159.64257862604163`, 178.00341189254863`}, {
-            149.38164324387438`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 4]& ,
-         TagBoxNote->"4"],
-        StyleBox["4", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[4, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9225141578947368, 0.7302212631578947, 0.6244960526315789], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{6.666666666666667, 0.}, {7.333333333333334, 37.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{186.4338285258021, 
-            204.79466179230914`}, {-44.02619195412882, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 37]& ,
-         TagBoxNote->"37"],
-        StyleBox["37", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[37, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.937986947368421, 0.7685785263157895, 0.5983557368421053], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{7.666666666666667, 0.}, {8.333333333333334, 18.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{213.22507842556263`, 231.58591169206963`}, {
-            67.32983437199424, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 18]& ,
-         TagBoxNote->"18"],
-        StyleBox["18", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[18, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9481723684210527, 0.8135963157894737, 0.5915438421052631], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{8.666666666666668, 0.}, {9.333333333333334, 33.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{240.01632832532314`, 
-            258.37716159183014`}, {-20.582817990734497`, 173.3250172072687}}],
-          
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 33]& ,
-         TagBoxNote->"33"],
-        StyleBox["33", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[33, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.956242, 0.8572503157894736, 0.5886633157894736], EdgeForm[{
-      GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{9.666666666666668, 0.}, {10.333333333333334`, 14.}, 
-             "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{266.80757822508366`, 285.16841149159063`}, {
-            90.77320833538856, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 14]& ,
-         TagBoxNote->"14"],
-        StyleBox["14", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[14, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9606089999999999, 0.8985176842105264, 0.5926626842105264], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{10.666666666666668`, 0.}, {11.333333333333334`, 
-             56.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{293.59882812484415`, 
-            311.9596613913511}, {-155.38221828025186`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 56]& ,
-         TagBoxNote->"56"],
-        StyleBox["56", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[56, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9570324736842105, 0.9281779473684211, 0.6088431578947369], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{11.666666666666668`, 0.}, {12.333333333333334`, 2.},
-              "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{320.39007802460463`, 338.7509112911116}, {
-            161.10333022557154`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 2]& ,
-         TagBoxNote->"2"],
-        StyleBox["2", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[2, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9489167894736842, 0.9512055789473685, 0.6319842631578947], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{12.666666666666668`, 0.}, {13.333333333333334`, 3.},
-              "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{347.1813279243651, 365.5421611908721}, {
-            155.24248673472295`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 3]& ,
-         TagBoxNote->"3"],
-        StyleBox["3", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[3, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.9181521578947368, 0.9486268947368421, 0.6826048421052632], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{13.666666666666668`, 0.}, {14.333333333333334`, 
-             51.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{373.9725778241256, 
-            392.33341109063264`}, {-126.07800082600895`, 173.3250172072687}}],
-          
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 51]& ,
-         TagBoxNote->"51"],
-        StyleBox["51", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[51, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.8785102105263158, 0.9384262105263158, 0.7399516842105263], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{14.666666666666668`, 0.}, {15.333333333333334`, 
-             34.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{400.76382772388615`, 
-            419.1246609903931}, {-26.443661481583064`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 34]& ,
-         TagBoxNote->"34"],
-        StyleBox["34", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[34, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.8091123684210526, 0.9054493684210526, 0.815200947368421], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{15.666666666666668`, 0.}, {16.333333333333336`, 
-             28.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{427.55507762364664`, 445.91591089015367`}, {
-            8.721399463508419, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 28]& ,
-         TagBoxNote->"28"],
-        StyleBox["28", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[28, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.7247476842105264, 0.8648064736842105, 0.8823652105263158], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{16.666666666666668`, 0.}, {17.333333333333336`, 
-             26.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{454.3463275234071, 472.70716078991416`}, {
-            20.44308644520558, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 26]& ,
-         TagBoxNote->"26"],
-        StyleBox["26", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[26, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.6224227894736842, 0.8149643157894737, 0.9398274736842105], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{17.666666666666668`, 0.}, {18.333333333333336`, 
-             14.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{481.1375774231676, 499.49841068967464`}, {
-            90.77320833538856, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 14]& ,
-         TagBoxNote->"14"],
-        StyleBox["14", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[14, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.5257917894736842, 0.7628034210526317, 0.9435318421052632], 
-      EdgeForm[{GrayLevel[0], Opacity[0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{18.666666666666668`, 0.}, {19.333333333333336`, 
-             50.}, "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{507.9288273229281, 
-            526.2896605894352}, {-120.21715733516035`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 50]& ,
-         TagBoxNote->"50"],
-        StyleBox["50", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[50, {}], "Tooltip"]& ]}, 
-     {RGBColor[0.431296, 0.709773, 0.927077], EdgeForm[{GrayLevel[0], Opacity[
-      0.5599999999999999], Thickness[Small]}], 
-      TagBox[
-       TooltipBox[
-        TagBox[
-         TagBox[
-          DynamicBox[{
-            FEPrivate`If[
-             CurrentValue["MouseOver"], 
-             EdgeForm[{
-               GrayLevel[0.5], 
-               AbsoluteThickness[1.5], 
-               Opacity[0.66]}], {}, {}], 
-            
-            RectangleBox[{19.666666666666668`, 0.}, {20.333333333333336`, 9.},
-              "RoundingRadius" -> 0]},
-           
-           ImageSizeCache->{{534.7200772226886, 553.0809104891957}, {
-            120.07742578963146`, 173.3250172072687}}],
-          "DelayedMouseEffectStyle"],
-         StatusArea[#, 9]& ,
-         TagBoxNote->"9"],
-        StyleBox["9", {}, StripOnInput -> False]],
-       Annotation[#, 
-        Style[9, {}], "Tooltip"]& ]}}, {}, {}}, {}, {}, {}, {}, 
-   StyleBox[
-    StyleBox[{
-      {Thickness[Tiny], 
-       LineBox[{{0.27333333333333326`, 0.}, {20.73453333333334, 0.}}], 
-       StyleBox[{}, "GraphicsLabel",
-        StripOnInput->False]}, 
-      StyleBox[{
-        {Thickness[Tiny], 
-         LineBox[{{0.6666666666666666, 0.}, 
-           Offset[{-1.102182119232618*^-15, -6.}, {0.6666666666666666, 0.}]}],
-          LineBox[{{20.33333333333334, 0.}, 
-           Offset[{-1.102182119232618*^-15, -6.}, {20.33333333333334, 
-            0.}]}], {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
-{}, {}, {}, {}, {}, {}, {}, {}}}, 
-        StyleBox[{}, "GraphicsLabel",
-         StripOnInput->False]}, "GraphicsTicks",
-       StripOnInput->False]},
-     Antialiasing->False], "GraphicsAxes",
-    StripOnInput->False]},
-  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
-  Axes->{False, True},
-  AxesLabel->{None, None},
-  AxesOrigin->{0.27333333333333326`, 0.},
-  CoordinatesToolOptions:>{"DisplayFunction" -> ({
-      Identity[
-       Part[#, 1]], 
-      Identity[
-       Part[#, 2]]}& ), "CopiedValueFunction" -> ({
-      Identity[
-       Part[#, 1]], 
-      Identity[
-       Part[#, 2]]}& )},
+   {RGBColor[1., 0.78, 0.2], EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+    {RGBColor[0.9457438963414634, 0.9529201036585366, 0.6380225975609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{106., 275.}, {16.400000000000006, 27.400000000000034}],
+        
+        Annotation[#, {{{89.6, 122.4}, {247.59999999999997`, 
+          302.40000000000003`}}, {106, 275, 275}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Geometry Dash\"", "\": \"", "275"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Geometry Dash", ": ", 275}], "Tooltip"]& ]}, 
+    {RGBColor[0.8633958841463415, 0.6442543109756097, 0.7817539390243903], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{30., 191.}, {13.783088831943743, 23.027843536296245}],
+        Annotation[#, {{{16.216911168056257`, 43.78308883194374}, {
+          167.97215646370375`, 214.02784353629625`}}, {30, 191, 191}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Space Waves\"", "\": \"", "191"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Space Waves", ": ", 191}], "Tooltip"]& ]}, 
+    {RGBColor[0.869915243902439, 0.6517590731707317, 0.7619395731707317], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{32., 174.}, {13.18696404270014, 22.031878949389295}],
+        Annotation[#, {{{18.81303595729986, 45.18696404270014}, {
+          151.9681210506107, 196.0318789493893}}, {32, 174, 174}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Soundboard\"", "\": \"", "174"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Soundboard", ": ", 174}], "Tooltip"]& ]}, 
+    {RGBColor[0.9569077012195122, 0.8635410731707317, 0.5892729756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{80., 170.}, {13.042518233920617, 21.79054875667225}],
+        Annotation[#, {{{66.95748176607938, 93.04251823392062}, {
+          148.20945124332775`, 191.79054875667225`}}, {80, 170, 170}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minecraft\"", "\": \"", "170"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minecraft", ": ", 170}], "Tooltip"]& ]}, 
+    {RGBColor[0.8814271463414634, 0.665636243902439, 0.728582743902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{36., 162.}, {12.748435648803415, 21.299215657147187}],
+        Annotation[#, {{{23.251564351196585`, 48.748435648803415`}, {
+          140.7007843428528, 183.2992156571472}}, {36, 162, 162}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Slope\"", "\": \"", "162"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Slope", ": ", 162}], "Tooltip"]& ]}, 
+    {RGBColor[0.9588634512195122, 0.9229826890243903, 0.6036222987804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{94., 161.}, {12.71116936443039, 21.23695369423126}],
+        Annotation[#, {{{81.28883063556961, 106.71116936443039`}, {
+          139.76304630576874`, 182.23695369423126`}}, {94, 161, 161}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Hypper Sandbox\"", "\": \"", "161"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Hypper Sandbox", ": ", 161}], "Tooltip"]& ]}, 
+    {RGBColor[0.8727932195121951, 0.6552283658536585, 0.7536003658536585], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{33., 151.}, {12.331945790374164, 20.603372844893414}],
+        Annotation[#, {{{20.668054209625836`, 45.331945790374164`}, {
+          130.3966271551066, 171.6033728448934}}, {33, 151, 151}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Snow Rider 3D\"", "\": \"", "151"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Snow Rider 3D", ": ", 151}], "Tooltip"]& ]}, 
+    {RGBColor[0.9342641219512196, 0.9511338780487805, 0.6565714146341464], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{109., 123.}, {11.197539251789067, 18.70808387189149}],
+        Annotation[#, {{{97.80246074821093, 120.19753925178907`}, {
+          104.29191612810851`, 141.7080838718915}}, {109, 123, 123}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"FNAF 1\"", "\": \"", "123"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"FNAF 1", ": ", 123}], "Tooltip"]& ]}, 
+    {RGBColor[0.8519627926829269, 0.6317704512195121, 0.8182700487804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{27., 108.}, {10.536189233128141, 17.603145426079948}],
+        Annotation[#, {{{16.46381076687186, 37.53618923312814}, {
+          90.39685457392005, 125.60314542607995`}}, {27, 108, 108}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Stickman Hook\"", "\": \"", "108"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Stickman Hook", ": ", 108}], "Tooltip"]& ]}, 
+    {RGBColor[0.9099275914634146, 0.7005739085365853, 0.646577987804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{46., 104.}, {10.352184826443448, 17.295723429545745}],
+        Annotation[#, {{{35.64781517355655, 56.35218482644345}, {
+          86.70427657045425, 121.29572342954575`}}, {46, 104, 104}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Ragdoll Archers\"", "\": \"", "104"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Ragdoll Archers", ": ", 104}], "Tooltip"]& ]}, 
+    {RGBColor[0.45319136585365855`, 0.7220605365853658, 0.9308897073170732], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{163., 103.}, {10.30563340692433, 17.217948496934525}],
+        Annotation[#, {{{152.69436659307567`, 173.30563340692433`}, {
+          85.78205150306547, 120.21794849693453`}}, {163, 103, 103}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tap Goal\"", "\": \"", "103"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tap Goal", ": ", 103}], "Tooltip"]& ]}, 
+    {RGBColor[0.9210506036585365, 0.7267738963414634, 0.6270637195121951], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{52., 98.}, {10.069410281974243, 16.82328303207892}],
+        Annotation[#, {{{41.93058971802576, 62.06941028197424}, {
+          81.17671696792108, 114.82328303207892`}}, {52, 98, 98}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Pick a Lock\"", "\": \"", "98"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Pick a Lock", ": ", 98}], "Tooltip"]& ]}, 
+    {RGBColor[0.848151762195122, 0.6276091646341463, 0.8304420853658536], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{26., 94.}, {9.876057788418898, 16.50024289040718}],
+        Annotation[#, {{{16.123942211581102`, 35.8760577884189}, {
+          77.49975710959282, 110.50024289040718`}}, {26, 94, 94}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Subway Surfers\"", "\": \"", "94"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Subway Surfers", ": ", 94}], "Tooltip"]& ]}, 
+    {RGBColor[0.9229044390243902, 0.7311405609756098, 0.6238113414634147], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{53., 89.}, {9.628485613949053, 16.086616208670975}],
+        Annotation[#, {{{43.37151438605095, 62.62848561394905}, {
+          72.91338379132903, 105.08661620867097`}}, {53, 89, 89}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"People Playground\"", "\": \"", "89"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"People Playground", ": ", 89}], "Tooltip"]& ]}, 
+    {RGBColor[0.8595848536585367, 0.6400930243902438, 0.7939259756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{29., 89.}, {9.628485613949053, 16.086616208670975}],
+        Annotation[#, {{{19.371514386050947`, 38.62848561394905}, {
+          72.91338379132903, 105.08661620867097`}}, {29, 89, 89}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Stack\"", "\": \"", "89"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Stack", ": ", 89}], "Tooltip"]& ]}, 
+    {RGBColor[0.431296, 0.709773, 0.927077], EdgeForm[{GrayLevel[0], Opacity[
+     0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{165., 89.}, {9.628485613949067, 16.086616208670975}],
+        Annotation[#, {{{155.37151438605093`, 174.62848561394907`}, {
+          72.91338379132903, 105.08661620867097`}}, {165, 89, 89}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Suika Game\"", "\": \"", "89"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Suika Game", ": ", 89}], "Tooltip"]& ]}, 
+    {RGBColor[0.9073289268292682, 0.6968598780487805, 0.6535298780487805], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{45., 88.}, {9.578143443688745, 16.002507948601917}],
+        Annotation[#, {{{35.421856556311255`, 54.578143443688745`}, {
+          71.99749205139808, 104.00250794860192`}}, {45, 88, 88}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Ragdoll Hit\"", "\": \"", "88"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Ragdoll Hit", ": ", 88}], "Tooltip"]& ]}, 
+    {RGBColor[0.4750867317073171, 0.7343480731707317, 0.9347024146341464], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{161., 85.}, {9.425375805587976, 15.747274211775022}],
+        Annotation[#, {{{151.57462419441202`, 170.42537580558798`}, {
+          69.25272578822498, 100.74727421177502`}}, {161, 85, 85}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"The Hardest Game\"", "\": \"", "85"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"The Hardest Game", ": ", 85}], "Tooltip"]& ]}, 
+    {RGBColor[0.9516503170731707, 0.8289682439024391, 0.5892178292682927], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{73., 77.}, {9.004279120992393, 15.043734628975088}],
+        Annotation[#, {{{63.99572087900761, 82.0042791209924}, {
+          61.95626537102491, 92.04373462897509}}, {73, 77, 77}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Monkey Mart\"", "\": \"", "77"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Monkey Mart", ": ", 77}], "Tooltip"]& ]}, 
+    {RGBColor[0.9532220609756097, 0.9389897012195122, 0.6197081890243903], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{100., 70.}, {8.617485403626688, 14.39750610118119}],
+        Annotation[#, {{{91.38251459637331, 108.61748540362669`}, {
+          55.602493898818814`, 84.3975061011812}}, {100, 70, 70}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Granny\"", "\": \"", "70"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Granny", ": ", 70}], "Tooltip"]& ]}, 
+    {RGBColor[0.8852807317073171, 0.9416434634146341, 0.7326102926829268], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{121., 67.}, {8.44581167428521, 14.110685358257001}],
+        Annotation[#, {{{112.55418832571479`, 129.4458116742852}, {
+          52.889314641743, 81.110685358257}}, {121, 67, 67}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Crazy Cattle 3D\"", "\": \"", "67"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Crazy Cattle 3D", ": ", 67}], "Tooltip"]& ]}, 
+    {RGBColor[0.8370407682926829, 0.9187205365853658, 0.7849177073170731], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{127., 67.}, {8.44581167428521, 14.110685358257001}],
+        Annotation[#, {{{118.55418832571479`, 135.4458116742852}, {
+          52.889314641743, 81.110685358257}}, {127, 67, 67}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Chrome Dino\"", "\": \"", "67"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chrome Dino", ": ", 67}], "Tooltip"]& ]}, 
+    {RGBColor[0.8405297012195122, 0.6192865914634146, 0.8547861585365853], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{24.000000000000004`, 65.}, {8.32921871426171, 13.91588980309578}],
+        Annotation[#, {{{15.670781285738293`, 32.329218714261714`}, {
+          51.08411019690422, 78.91588980309578}}, {24, 65, 65}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tanuki Sunset\"", "\": \"", "65"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tanuki Sunset", ": ", 65}], "Tooltip"]& ]}, 
+    {RGBColor[0.86116075, 0.930182, 0.758764], EdgeForm[{GrayLevel[0], 
+     Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{124., 64.}, {8.270249513494889, 13.817368089619507}],
+        Annotation[#, {{{115.72975048650511`, 132.2702495134949}, {
+          50.18263191038049, 77.8173680896195}}, {124, 64, 64}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Cookie Clicker\"", "\": \"", "64"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Cookie Clicker", ": ", 64}], "Tooltip"]& ]}, 
+    {RGBColor[0.9284659451219512, 0.7442405548780487, 0.6140542073170732], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{56., 63.}, {8.210817787935497, 13.718073621306885}],
+        Annotation[#, {{{47.7891822120645, 64.2108177879355}, {
+          49.281926378693115`, 76.71807362130689}}, {56, 63, 63}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Paper.io 2\"", "\": \"", "63"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Paper.io 2", ": ", 63}], "Tooltip"]& ]}, 
+    {RGBColor[0.956401768292683, 0.8587600975609756, 0.5888096341463415], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{79., 59.99999999999999}, {8.029634625776595, 13.415365167456024}],
+        Annotation[#, {{{70.9703653742234, 87.0296346257766}, {
+          46.58463483254397, 73.41536516745602}}, {79, 60, 60}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minecraft 1.21\"", "\": \"", "60"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minecraft 1.21", ": ", 60}], "Tooltip"]& ]}, 
+    {RGBColor[0.9504702987804878, 0.823752768292683, 0.590007012195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{72., 56.}, {7.78085637473572, 12.999723455351159}],
+        Annotation[#, {{{64.21914362526428, 79.78085637473572}, {
+          43.00027654464884, 68.99972345535116}}, {72, 56, 56}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"MotoX3M\"", "\": \"", "56"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"MotoX3M", ": ", 56}], "Tooltip"]& ]}, 
+    {RGBColor[0.8871830975609756, 0.6725748292682927, 0.7119043292682927], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{38., 56.}, {7.780856374735727, 12.999723455351159}],
+        Annotation[#, {{{30.219143625264273`, 45.78085637473573}, {
+          43.00027654464884, 68.99972345535116}}, {38, 56, 56}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Sandtris\"", "\": \"", "56"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Sandtris", ": ", 56}], "Tooltip"]& ]}, 
+    {RGBColor[0.7939770487804878, 0.5478226097560975, 0.949096512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{11., 56.}, {7.780856374735727, 12.999723455351159}],
+        Annotation[#, {{{3.219143625264273, 18.780856374735727`}, {
+          43.00027654464884, 68.99972345535116}}, {11, 56, 56}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Truck Space 2\"", "\": \"", "56"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Truck Space 2", ": ", 56}], "Tooltip"]& ]}, 
+    {RGBColor[0.8772407378048781, 0.937822975609756, 0.7413281951219511], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{122., 54.}, {7.65313357324311, 12.786332921150077}],
+        Annotation[#, {{{114.34686642675689`, 129.6531335732431}, {
+          41.21366707884992, 66.78633292115008}}, {122, 54, 54}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Coreball\"", "\": \"", "54"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Coreball", ": ", 54}], "Tooltip"]& ]}, 
+    {RGBColor[0.9485209024390244, 0.9523288780487805, 0.6331130975609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{105., 53.}, {7.588385076870935, 12.678155555259991}],
+        Annotation[#, {{{97.41161492312906, 112.58838507687094`}, {
+          40.32184444474001, 65.67815555525999}}, {105, 53, 53}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Getting Over It\"", "\": \"", "53"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Getting Over It", ": ", 53}], "Tooltip"]& ]}, 
+    {RGBColor[0.8843051219512195, 0.6691055365853659, 0.7202435365853659], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{37., 53.}, {7.588385076870942, 12.678155555259991}],
+        Annotation[#, {{{29.411614923129058`, 44.58838507687094}, {
+          40.32184444474001, 65.67815555525999}}, {37, 53, 53}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Slither.io\"", "\": \"", "53"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Slither.io", ": ", 53}], "Tooltip"]& ]}, 
+    {RGBColor[0.9266109390243903, 0.9499430609756098, 0.6689372926829268], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{111., 51.}, {7.457028978644274, 12.458694757003244}],
+        Annotation[#, {{{103.54297102135573`, 118.45702897864427`}, {
+          38.541305242996756`, 63.458694757003244`}}, {111, 51, 51}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Five Nights at Epstein's\"", "\": \"", "51"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Five Nights at Epstein's", ": ", 51}], "Tooltip"]& ]}, 
+    {RGBColor[0.8035824634146342, 0.5709197926829268, 0.9516463658536586], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{14., 51.}, {7.457028978644274, 12.458694757003244}],
+        Annotation[#, {{{6.542971021355727, 21.457028978644274`}, {
+          38.541305242996756`, 63.458694757003244`}}, {14, 51, 51}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Time Shooter 3\"", "\": \"", "51"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Time Shooter 3", ": ", 51}], "Tooltip"]& ]}, 
+    {RGBColor[0.8214745487804879, 0.5984801585365853, 0.9156463414634146], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{19., 50.}, {7.390384915145077, 12.34735040701068}],
+        Annotation[#, {{{11.609615084854923`, 26.390384915145077`}, {
+          37.65264959298932, 62.34735040701068}}, {19, 50, 50}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tetris\"", "\": \"", "50"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tetris", ": ", 50}], "Tooltip"]& ]}, 
+    {RGBColor[0.7615596890243903, 0.882737493902439, 0.8616928109756097], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{136., 50.}, {7.390384915145091, 12.34735040701068}],
+        Annotation[#, {{{128.6096150848549, 143.3903849151451}, {
+          37.65264959298932, 62.34735040701068}}, {136, 50, 50}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Build a Plane\"", "\": \"", "50"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Build a Plane", ": ", 50}], "Tooltip"]& ]}, 
+    {RGBColor[0.6193031280487805, 0.8134447378048781, 0.9415793719512195], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{148., 48.}, {7.255066654776158, 12.121269898833319}],
+        Annotation[#, {{{140.74493334522384`, 155.25506665477616`}, {
+          35.87873010116668, 60.12126989883332}}, {148, 48, 48}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Basketball Random\"", "\": \"", "48"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Basketball Random", ": ", 48}], "Tooltip"]& ]}, 
+    {RGBColor[0.6785766951219513, 0.8423167195121951, 0.9082933048780487], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{143., 46.}, {7.11689865106905, 11.89042823410314}],
+        Annotation[#, {{{135.88310134893095`, 150.11689865106905`}, {
+          34.10957176589686, 57.89042823410314}}, {143, 46, 46}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"BitPlanes\"", "\": \"", "46"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"BitPlanes", ": ", 46}], "Tooltip"]& ]}, 
+    {RGBColor[0.7259955487804879, 0.8654143048780488, 0.8816644512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{139., 44.}, {6.975692898843306, 11.654511306604043}],
+        Annotation[#, {{{132.0243071011567, 145.9756928988433}, {
+          32.34548869339596, 55.65451130660404}}, {139, 44, 44}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Bloxorz\"", "\": \"", "44"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Bloxorz", ": ", 44}], "Tooltip"]& ]}, 
+    {RGBColor[0.6548672682926829, 0.8307679268292684, 0.921607731707317], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{145., 44.}, {6.975692898843306, 11.654511306604043}],
+        Annotation[#, {{{138.0243071011567, 151.9756928988433}, {
+          32.34548869339596, 55.65451130660404}}, {145, 44, 44}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Bendy and the Ink Machine\"", "\": \"", "44"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Bendy and the Ink Machine", ": ", 44}], "Tooltip"]& ]}, 
+    {RGBColor[0.5955937012195123, 0.8018959451219513, 0.9548937987804877], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{150., 43.}, {6.90388629600443, 11.534541738446443}],
+        Annotation[#, {{{143.09611370399557`, 156.90388629600443`}, {
+          31.465458261553557`, 54.53454173844644}}, {150, 43, 43}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Baldi's Basics Plus\"", "\": \"", "43"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Baldi's Basics Plus", ": ", 43}], "Tooltip"]& ]}, 
+    {RGBColor[0.5407728292682927, 0.7712106829268293, 0.9461405365853659], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{155., 42.}, {6.831239764172921, 11.413168874288884}],
+        Annotation[#, {{{148.16876023582708`, 161.83123976417292`}, {
+          30.586831125711118`, 53.413168874288885`}}, {155, 42, 42}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"AI Music Creator\"", "\": \"", "42"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"AI Music Creator", ": ", 42}], "Tooltip"]& ]}, 
+    {RGBColor[0.8557738231707317, 0.635931737804878, 0.806098012195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{28., 41.}, {6.757723120941655, 11.29034228742691}],
+        Annotation[#, {{{21.242276879058345`, 34.757723120941655`}, {
+          29.70965771257309, 52.29034228742691}}, {28, 41, 41}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Steal Brainrot Online\"", "\": \"", "41"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Steal Brainrot Online", ": ", 41}], "Tooltip"]& ]}, 
+    {RGBColor[0.8756711951219512, 0.6586976585365854, 0.7452611585365854], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{34., 38.}, {6.531621918667325, 10.912587839724672}],
+        Annotation[#, {{{27.468378081332677`, 40.53162191866733}, {
+          27.087412160275328`, 48.91258783972467}}, {34, 38, 38}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Slowroads\"", "\": \"", "38"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Slowroads", ": ", 38}], "Tooltip"]& ]}, 
+    {RGBColor[0.4422436829268293, 0.7159167682926829, 0.9289833536585366], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{164., 38.}, {6.5316219186673266, 10.912587839724672}],
+        Annotation[#, {{{157.46837808133267`, 170.53162191866733`}, {
+          27.087412160275328`, 48.91258783972467}}, {164, 38, 38}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Circloo\"", "\": \"", "38"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Circloo", ": ", 38}], "Tooltip"]& ]}, 
+    {RGBColor[0.7811698292682927, 0.5170263658536585, 0.9456967073170732], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{7., 37.}, {6.454283399102833, 10.783375922891317}],
+        Annotation[#, {{{0.5457166008971672, 13.454283399102833`}, {
+          26.216624077108683`, 47.78337592289132}}, {7, 37, 37}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Warfare Area 3\"", "\": \"", "37"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Warfare Area 3", ": ", 37}], "Tooltip"]& ]}, 
+    {RGBColor[0.46413904878048784`, 0.7282043048780488, 0.9327960609756097], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{162., 37.}, {6.454283399102849, 10.783375922891317}],
+        Annotation[#, {{{155.54571660089715`, 168.45428339910285`}, {
+          26.216624077108683`, 47.78337592289132}}, {162, 37, 37}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"FIFA 2007\"", "\": \"", "37"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"FIFA 2007", ": ", 37}], "Tooltip"]& ]}, 
+    {RGBColor[0.8958170243902439, 0.6829827073170731, 0.6868867073170731], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{41., 34.}, {6.215773778645037, 10.38489033749232}],
+        Annotation[#, {{{34.78422622135496, 47.21577377864504}, {
+          23.61510966250768, 44.38489033749232}}, {41, 34, 34}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Sand:box\"", "\": \"", "34"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Sand:box", ": ", 34}], "Tooltip"]& ]}, 
+    {RGBColor[0.806784268292683, 0.5786188536585366, 0.9524963170731707], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{15., 34.}, {6.215773778645037, 10.38489033749232}],
+        Annotation[#, {{{8.784226221354963, 21.215773778645037`}, {
+          23.61510966250768, 44.38489033749232}}, {15, 34, 34}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"The Typing Game\"", "\": \"", "34"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"The Typing Game", ": ", 34}], "Tooltip"]& ]}, 
+    {RGBColor[0.9191967682926829, 0.722407231707317, 0.6303160975609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{51., 33.}, {6.13394773985069, 10.248180979994437}],
+        Annotation[#, {{{44.86605226014931, 57.13394773985069}, {
+          22.751819020005563`, 43.24818097999444}}, {51, 33, 33}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Ping Pong\"", "\": \"", "33"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Ping Pong", ": ", 33}], "Tooltip"]& ]}, 
+    {RGBColor[0.9151311646341463, 0.9481568353658536, 0.6874861097560976], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{114., 33.}, {6.133947739850669, 10.248180979994437}],
+        Annotation[#, {{{107.86605226014933`, 120.13394773985067`}, {
+          22.751819020005563`, 43.24818097999444}}, {114, 33, 33}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Evolving Bombs 3D\"", "\": \"", "33"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Evolving Bombs 3D", ": ", 33}], "Tooltip"]& ]}, 
+    {RGBColor[0.9074779817073171, 0.9469660182926829, 0.699851987804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{116., 33.}, {6.133947739850669, 10.248180979994437}],
+        Annotation[#, {{{109.86605226014933`, 122.13394773985067`}, {
+          22.751819020005563`, 43.24818097999444}}, {116, 33, 33}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Doodle Jump\"", "\": \"", "33"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Doodle Jump", ": ", 33}], "Tooltip"]& ]}, 
+    {RGBColor[0.7875734390243903, 0.532424487804878, 0.9473966097560976], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{9., 33.}, {6.133947739850685, 10.248180979994437}],
+        Annotation[#, {{{2.8660522601493152`, 15.133947739850685`}, {
+          22.751819020005563`, 43.24818097999444}}, {9, 33, 33}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tunnel Rush\"", "\": \"", "33"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tunnel Rush", ": ", 33}], "Tooltip"]& ]}, 
+    {RGBColor[0.7747662195121952, 0.501628243902439, 0.9439968048780488], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{5., 33.}, {6.133947739850685, 10.248180979994437}],
+        Annotation[#, {{{-1.1339477398506848`, 11.133947739850685`}, {
+          22.751819020005563`, 43.24818097999444}}, {5, 33, 33}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Wordle\"", "\": \"", "33"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Wordle", ": ", 33}], "Tooltip"]& ]}, 
+    {RGBColor[0.9419173048780488, 0.9523246951219512, 0.6442055365853658], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{107., 32.}, {6.050872231730494, 10.10938409447656}],
+        Annotation[#, {{{100.9491277682695, 113.0508722317305}, {
+          21.89061590552344, 42.10938409447656}}, {107, 32, 32}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"gamble1928\"", "\": \"", "32"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"gamble1928", ": ", 32}], "Tooltip"]& ]}, 
+    {RGBColor[0.9513415975609756, 0.9443253719512196, 0.6250701524390244], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{102., 31.}, {5.966488206344735, 9.968401027673501}],
+        Annotation[#, {{{96.03351179365526, 107.96648820634474`}, {
+          21.0315989723265, 40.9684010276735}}, {102, 31, 31}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Going Balls\"", "\": \"", "31"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Going Balls", ": ", 31}], "Tooltip"]& ]}, 
+    {RGBColor[0.9247582743902439, 0.7355072256097561, 0.6205589634146341], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{54., 31.}, {5.966488206344721, 9.968401027673501}],
+        Annotation[#, {{{48.03351179365528, 59.96648820634472}, {
+          21.0315989723265, 40.9684010276735}}, {54, 31, 31}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Peggle\"", "\": \"", "31"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Peggle", ": ", 31}], "Tooltip"]& ]}, 
+    {RGBColor[0.898695, 0.686452, 0.6785475], EdgeForm[{GrayLevel[0], Opacity[
+     0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{42., 31.}, {5.966488206344721, 9.968401027673501}],
+        Annotation[#, {{{36.03351179365528, 47.96648820634472}, {
+          21.0315989723265, 40.9684010276735}}, {42, 31, 31}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"roberto simulator\"", "\": \"", "31"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"roberto simulator", ": ", 31}], "Tooltip"]& ]}, 
+    {RGBColor[0.9614610975609755, 0.9065698536585366, 0.5934430487804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{89., 30.}, {5.880731812970453, 9.825125102157948}],
+        Annotation[#, {{{83.11926818702955, 94.88073181297045}, {
+          20.174874897842052`, 39.82512510215795}}, {89, 30, 30}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Layers Roll\"", "\": \"", "30"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Layers Roll", ": ", 30}], "Tooltip"]& ]}, 
+    {RGBColor[0.9553899024390244, 0.8491981463414634, 0.5878829512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{77., 30.}, {5.880731812970453, 9.825125102157948}],
+        Annotation[#, {{{71.11926818702955, 82.88073181297045}, {
+          20.174874897842052`, 39.82512510215795}}, {77, 30, 30}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minecraft Platformer\"", "\": \"", "30"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minecraft Platformer", ": ", 30}], "Tooltip"]& ]}, 
+    {RGBColor[0.9173429329268292, 0.7180405670731708, 0.633568475609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{50., 30.}, {5.880731812970453, 9.825125102157948}],
+        Annotation[#, {{{44.11926818702955, 55.88073181297045}, {
+          20.174874897842052`, 39.82512510215795}}, {50, 30, 30}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Please Don't Touch Anything\"", "\": \"", "30"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Please Don't Touch Anything", ": ", 30}], "Tooltip"]& ]}, 
+    {RGBColor[0.9528303353658537, 0.834183719512195, 0.5884286463414634], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{74., 29.}, {5.793533832728357, 9.679440671753461}],
+        Annotation[#, {{{68.20646616727164, 79.79353383272836}, {
+          19.32055932824654, 38.67944067175346}}, {74, 29, 29}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minesweeper\"", "\": \"", "29"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minesweeper", ": ", 29}], "Tooltip"]& ]}, 
+    {RGBColor[0.8329076402439025, 0.6109640182926829, 0.8791302317073171], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{22., 29.}, {5.79353383272835, 9.679440671753461}],
+        Annotation[#, {{{16.20646616727165, 27.79353383272835}, {
+          19.32055932824654, 38.67944067175346}}, {22, 29, 29}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Telekinesis Car\"", "\": \"", "29"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Telekinesis Car", ": ", 29}], "Tooltip"]& ]}, 
+    {RGBColor[0.7141408353658537, 0.8596399085365853, 0.8883216646341463], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{140., 29.}, {5.793533832728343, 9.679440671753461}],
+        Annotation[#, {{{134.20646616727166`, 145.79353383272834`}, {
+          19.32055932824654, 38.67944067175346}}, {140, 29, 29}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Blocky Snakes\"", "\": \"", "29"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Blocky Snakes", ": ", 29}], "Tooltip"]& ]}, 
+    {RGBColor[0.6311578414634147, 0.8192191341463415, 0.9349221585365853], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{147., 29.}, {5.793533832728343, 9.679440671753461}],
+        Annotation[#, {{{141.20646616727166`, 152.79353383272834`}, {
+          19.32055932824654, 38.67944067175346}}, {147, 29, 29}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Basketball Stars\"", "\": \"", "29"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Basketball Stars", ": ", 29}], "Tooltip"]& ]}, 
+    {RGBColor[0.9599432987804878, 0.8922269268292683, 0.5920530243902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{86., 28.}, {5.704819024647719, 9.531222028984608}],
+        Annotation[#, {{{80.29518097535228, 91.70481902464772}, {
+          18.468777971015392`, 37.53122202898461}}, {86, 28, 28}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Make a Superboat!\"", "\": \"", "28"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Make a Superboat!", ": ", 28}], "Tooltip"]& ]}, 
+    {RGBColor[0.956982987804878, 0.9283183597560976, 0.6089842621951219], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{96., 28.}, {5.704819024647719, 9.531222028984608}],
+        Annotation[#, {{{90.29518097535228, 101.70481902464772`}, {
+          18.468777971015392`, 37.53122202898461}}, {96, 28, 28}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Happy Wheels\"", "\": \"", "28"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Happy Wheels", ": ", 28}], "Tooltip"]& ]}, 
+    {RGBColor[0.844340731707317, 0.6234478780487804, 0.8426141219512195], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{25., 28.}, {5.704819024647719, 9.531222028984608}],
+        Annotation[#, {{{19.29518097535228, 30.70481902464772}, {
+          18.468777971015392`, 37.53122202898461}}, {25, 28, 28}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"SuperTuxKart\"", "\": \"", "28"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"SuperTuxKart", ": ", 28}], "Tooltip"]& ]}, 
+    {RGBColor[0.8100414573170732, 0.5859962987804878, 0.9521624512195123], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{16., 28.}, {5.704819024647719, 9.531222028984608}],
+        Annotation[#, {{{10.295180975352281`, 21.70481902464772}, {
+          18.468777971015392`, 37.53122202898461}}, {16, 28, 28}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"There is no game\"", "\": \"", "28"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"There is no game", ": ", 28}], "Tooltip"]& ]}, 
+    {RGBColor[0.7968407987804879, 0.8996180975609755, 0.8285072195121951], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{132., 28.}, {5.70481902464774, 9.531222028984608}],
+        Annotation[#, {{{126.29518097535227`, 137.70481902464775`}, {
+          18.468777971015392`, 37.53122202898461}}, {132, 28, 28}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Chess Classic\"", "\": \"", "28"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chess Classic", ": ", 28}], "Tooltip"]& ]}, 
+    {RGBColor[0.956042756097561, 0.9309861951219512, 0.611665243902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{97., 27.}, {5.614505365600138, 9.380332135210011}],
+        Annotation[#, {{{91.38549463439986, 102.61450536560014`}, {
+          17.61966786478999, 36.38033213521001}}, {97, 27, 27}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Half-Life 1\"", "\": \"", "27"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Half-Life 1", ": ", 27}], "Tooltip"]& ]}, 
+    {RGBColor[0.853120756097561, 0.926361512195122, 0.7674819024390244], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{125., 27.}, {5.614505365600138, 9.380332135210011}],
+        Annotation[#, {{{119.38549463439986`, 130.61450536560014`}, {
+          17.61966786478999, 36.38033213521001}}, {125, 27, 27}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Connect The Pipes\"", "\": \"", "27"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Connect The Pipes", ": ", 27}], "Tooltip"]& ]}, 
+    {RGBColor[0.7497049756097561, 0.8769630975609756, 0.8683500243902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{137., 27.}, {5.614505365600166, 9.380332135210011}],
+        Annotation[#, {{{131.38549463439983`, 142.61450536560017`}, {
+          17.61966786478999, 36.38033213521001}}, {137, 27, 27}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Buckshot Roulette\"", "\": \"", "27"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Buckshot Roulette", ": ", 27}], "Tooltip"]& ]}, 
+    {RGBColor[0.6074484146341463, 0.8076703414634147, 0.9482365853658536], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{149., 27.}, {5.614505365600138, 9.380332135210011}],
+        Annotation[#, {{{143.38549463439986`, 154.61450536560014`}, {
+          17.61966786478999, 36.38033213521001}}, {149, 27, 27}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Ball Blast\"", "\": \"", "27"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Ball Blast", ": ", 27}], "Tooltip"]& ]}, 
+    {RGBColor[0.4860344146341464, 0.7404918414634146, 0.9366087682926829], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{160., 27.}, {5.614505365600138, 9.380332135210011}],
+        Annotation[#, {{{154.38549463439986`, 165.61450536560014`}, {
+          17.61966786478999, 36.38033213521001}}, {160, 27, 27}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"2048 Merge Run\"", "\": \"", "27"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"2048 Merge Run", ": ", 27}], "Tooltip"]& ]}, 
+    {RGBColor[0.9540103536585366, 0.8393991951219513, 0.5876394634146341], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{75., 26.}, {5.522503162257806, 9.22662113694291}],
+        Annotation[#, {{{69.4774968377422, 80.5225031622578}, {
+          16.77337886305709, 35.22662113694291}}, {75, 26, 26}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Miner Cat\"", "\": \"", "26"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Miner Cat", ": ", 26}], "Tooltip"]& ]}, 
+    {RGBColor[0.8959982073170732, 0.9451797926829268, 0.7184008048780488], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{119., 26.}, {5.522503162257806, 9.22662113694291}],
+        Annotation[#, {{{113.4774968377422, 124.5225031622578}, {
+          16.77337886305709, 35.22662113694291}}, {119, 26, 26}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Cubit\"", "\": \"", "26"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Cubit", ": ", 26}], "Tooltip"]& ]}, 
+    {RGBColor[0.8785491707317074, 0.6621669512195122, 0.7369219512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{35., 26.}, {5.522503162257804, 9.22662113694291}],
+        Annotation[#, {{{29.477496837742198`, 40.522503162257806`}, {
+          16.77337886305709, 35.22662113694291}}, {35, 26, 26}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Slope 2\"", "\": \"", "26"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Slope 2", ": ", 26}], "Tooltip"]& ]}, 
+    {RGBColor[0.8138524878048781, 0.5901575853658536, 0.9399904146341463], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{17., 26.}, {5.522503162257802, 9.22662113694291}],
+        Annotation[#, {{{11.477496837742198`, 22.522503162257802`}, {
+          16.77337886305709, 35.22662113694291}}, {17, 26, 26}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{
+        "\"\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8\"", 
+         "\": \"", "26"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{
+        "\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8", ": ", 
+         26}], "Tooltip"]& ]}, 
+    {RGBColor[0.948110262195122, 0.8133218170731707, 0.5915853780487805], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{70., 25.}, {5.428714007711363, 9.069924622639718}],
+        Annotation[#, {{{64.57128599228864, 75.42871400771136}, {
+          15.930075377360282`, 34.06992462263972}}, {70, 25, 25}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Office Fight\"", "\": \"", "25"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Office Fight", ": ", 25}], "Tooltip"]& ]}, 
+    {RGBColor[0.960449231707317, 0.8970079024390244, 0.5925163658536585], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{87., 24.}, {5.333029548186133, 8.910061562213407}],
+        Annotation[#, {{{81.66697045181387, 92.33302954818613}, {
+          15.089938437786593`, 32.91006156221341}}, {87, 24, 24}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Learn to Fly 3\"", "\": \"", "24"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Learn to Fly 3", ": ", 24}], "Tooltip"]& ]}, 
+    {RGBColor[0.9522818292682926, 0.9416575365853659, 0.6223891707317073], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{101., 24.}, {5.333029548186133, 8.910061562213407}],
+        Annotation[#, {{{95.66697045181387, 106.33302954818613`}, {
+          15.089938437786593`, 32.91006156221341}}, {101, 24, 24}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Google Feud\"", "\": \"", "24"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Google Feud", ": ", 24}], "Tooltip"]& ]}, 
+    {RGBColor[0.9227843475609756, 0.9493476524390244, 0.675120231707317], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{112., 24.}, {5.3330295481861185, 8.910061562213407}],
+        Annotation[#, {{{106.66697045181388`, 117.33302954818612`}, {
+          15.089938437786593`, 32.91006156221341}}, {112, 24, 24}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Fifa 11\"", "\": \"", "24"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Fifa 11", ": ", 24}], "Tooltip"]& ]}, 
+    {RGBColor[0.551720512195122, 0.7773544512195122, 0.9480468902439024], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{154., 24.}, {5.3330295481861185, 8.910061562213407}],
+        Annotation[#, {{{148.66697045181388`, 159.33302954818612`}, {
+          15.089938437786593`, 32.91006156221341}}, {154, 24, 24}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Amaze\"", "\": \"", "24"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Amaze", ": ", 24}], "Tooltip"]& ]}, 
+    {RGBColor[0.9594373658536585, 0.8874459512195122, 0.5915896829268292], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{85., 23.}, {5.235330015821816, 8.746831855702304}],
+        Annotation[#, {{{79.76466998417818, 90.23533001582182}, {
+          14.253168144297696`, 31.746831855702304`}}, {85, 23, 23}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"maz ball\"", "\": \"", "23"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"maz ball", ": ", 23}], "Tooltip"]& ]}, 
+    {RGBColor[0.9113045731707318, 0.9475614268292682, 0.6936690487804877], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{115., 22.}, {5.135482470880447, 8.580013396471003}],
+        Annotation[#, {{{109.86451752911955`, 120.13548247088045`}, {
+          13.419986603528999`, 30.580013396471003`}}, {115, 22, 22}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"DOOM\"", "\": \"", "22"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"DOOM", ": ", 22}], "Tooltip"]& ]}, 
+    {RGBColor[0.9589314329268293, 0.8826649756097561, 0.5911263414634146], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{84., 21.}, {5.03333867979137, 8.409358525992893}],
+        Annotation[#, {{{78.96666132020863, 89.03333867979137}, {
+          12.590641474007105`, 29.409358525992893`}}, {84, 21, 21}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Maze\"", "\": \"", "21"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Maze", ": ", 21}], "Tooltip"]& ]}, 
+    {RGBColor[0.6667219817073171, 0.8365423231707317, 0.9149505182926829], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{144., 21.}, {5.03333867979137, 8.409358525992893}],
+        Annotation[#, {{{138.96666132020863`, 149.03333867979137`}, {
+          12.590641474007105`, 29.409358525992893`}}, {144, 21, 21}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Bergentruck 201x\"", "\": \"", "21"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Bergentruck 201x", ": ", 21}], "Tooltip"]& ]}, 
+    {RGBColor[0.5298251463414635, 0.7650669146341463, 0.9442341829268293], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{156., 21.}, {5.03333867979137, 8.409358525992893}],
+        Annotation[#, {{{150.96666132020863`, 161.03333867979137`}, {
+          12.590641474007105`, 29.409358525992893`}}, {156, 21, 21}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Ages of Conflict\"", "\": \"", "21"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Ages of Conflict", ": ", 21}], "Tooltip"]& ]}, 
+    {RGBColor[0.9598036829268293, 0.9203148536585366, 0.6009413170731708], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{93., 20.}, {4.928732532346288, 8.23458971867613}],
+        Annotation[#, {{{88.07126746765371, 97.92873253234629}, {
+          11.76541028132387, 28.23458971867613}}, {93, 20, 20}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Jelly Drift\"", "\": \"", "20"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Jelly Drift", ": ", 20}], "Tooltip"]& ]}, 
+    {RGBColor[0.8290966097560976, 0.606802731707317, 0.891302268292683], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{21., 19.000000000000004`}, {4.8214768694698655, 8.055394281919163}],
+        Annotation[#, {{{16.178523130530134`, 25.821476869469866`}, {
+          10.94460571808084, 27.055394281919167`}}, {21, 19, 19}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Telekinesis Drive\"", "\": \"", "19"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Telekinesis Drive", ": ", 19}], "Tooltip"]& ]}, 
+    {RGBColor[0.8048807926829269, 0.9034385853658536, 0.8197893170731707], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{131., 19.000000000000004`}, {4.821476869469876, 8.055394281919163}],
+        Annotation[#, {{{126.17852313053012`, 135.82147686946988`}, {
+          10.94460571808084, 27.055394281919167`}}, {131, 19, 19}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Chicken Game 2\"", "\": \"", "19"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chicken Game 2", ": ", 19}], "Tooltip"]& ]}, 
+    {RGBColor[0.9445702073170732, 0.7976753902439024, 0.5939529268292683], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{67., 18.}, {4.711359548315912, 7.871417781942437}],
+        Annotation[#, {{{62.28864045168409, 71.71135954831591}, {
+          10.128582218057563`, 25.871417781942437`}}, {67, 18, 18}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"osu!\"", "\": \"", "18"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"osu!", ": ", 18}], "Tooltip"]& ]}, 
+    {RGBColor[0.7843716341463415, 0.5247254268292683, 0.9465466585365854], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{8., 18.}, {4.711359548315912, 7.871417781942437}],
+        Annotation[#, {{{3.2886404516840884`, 12.711359548315912`}, {
+          10.128582218057563`, 25.871417781942437`}}, {8, 18, 18}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Twisted Rope 3D\"", "\": \"", "18"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Twisted Rope 3D", ": ", 18}], "Tooltip"]& ]}, 
+    {RGBColor[0.49698209756097567`, 0.7466356097560976, 0.9385151219512196], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{159., 18.}, {4.711359548315897, 7.871417781942437}],
+        Annotation[#, {{{154.2886404516841, 163.7113595483159}, {
+          10.128582218057563`, 25.871417781942437`}}, {159, 18, 18}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"3D Plane Game\"", "\": \"", "18"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"3D Plane Game", ": ", 18}], "Tooltip"]& ]}, 
+    {RGBColor[0.9036513902439025, 0.9463706097560975, 0.7060349268292683], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{117., 17.}, {4.598138507834932, 7.682255799675463}],
+        Annotation[#, {{{112.40186149216507`, 121.59813850783493`}, {
+          9.317744200324537, 24.682255799675463`}}, {117, 17, 17}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"DON'T YOU LECTURE ME\"", "\": \"", "17"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"DON'T YOU LECTURE ME", ": ", 17}], "Tooltip"]& ]}, 
+    {RGBColor[0.8921716158536586, 0.9445843841463415, 0.724583743902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{120., 17.}, {4.598138507834932, 7.682255799675463}],
+        Annotation[#, {{{115.40186149216507`, 124.59813850783493`}, {
+          9.317744200324537, 24.682255799675463`}}, {120, 17, 17}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Crazy Kitty 3D\"", "\": \"", "17"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Crazy Kitty 3D", ": ", 17}], "Tooltip"]& ]}, 
+    {RGBColor[0.9304375304878049, 0.9505384695121951, 0.6627543536585365], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{110., 16.}, {4.481535505783512, 7.487443466979792}],
+        Annotation[#, {{{105.51846449421649`, 114.48153550578351`}, {
+          8.512556533020208, 23.48744346697979}}, {110, 16, 16}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Five nights at Winston's\"", "\": \"", "16"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Five nights at Winston's", ": ", 16}], "Tooltip"]& ]}, 
+    {RGBColor[0.930319780487805, 0.7486072195121951, 0.6108018292682927], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{57., 16.}, {4.481535505783526, 7.487443466979792}],
+        Annotation[#, {{{52.518464494216474`, 61.481535505783526`}, {
+          8.512556533020208, 23.48744346697979}}, {57, 16, 16}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Paperception\"", "\": \"", "16"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Paperception", ": ", 16}], "Tooltip"]& ]}, 
+    {RGBColor[0.8670372682926829, 0.6482897804878048, 0.7702787804878048], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{31., 16.}, {4.481535505783526, 7.487443466979792}],
+        Annotation[#, {{{26.518464494216474`, 35.481535505783526`}, {
+          8.512556533020208, 23.48744346697979}}, {31, 16, 16}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Spacebar Clicker\"", "\": \"", "16"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Spacebar Clicker", ": ", 16}], "Tooltip"]& ]}, 
+    {RGBColor[0.9541622926829268, 0.9363218658536585, 0.6170272073170732], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{99., 15.}, {4.361228061924379, 7.286442005898049}],
+        Annotation[#, {{{94.63877193807562, 103.36122806192438`}, {
+          7.713557994101952, 22.28644200589805}}, {99, 15, 15}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Granny 2\"", "\": \"", "15"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Granny 2", ": ", 15}], "Tooltip"]& ]}, 
+    {RGBColor[0.9398501341463414, 0.776813487804878, 0.5971096585365854], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{63., 15.}, {4.361228061924379, 7.286442005898049}],
+        Annotation[#, {{{58.63877193807562, 67.36122806192438}, {
+          7.713557994101952, 22.28644200589805}}, {63, 15, 15}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Cheeseria\"", "\": \"", "15"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Cheeseria", ": ", 15}], "Tooltip"]& ]}, 
+    {RGBColor[0.8929390487804878, 0.6795134146341463, 0.6952259146341463], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{40., 15.}, {4.361228061924379, 7.286442005898049}],
+        Annotation[#, {{{35.63877193807562, 44.36122806192438}, {
+          7.713557994101952, 22.28644200589805}}, {40, 15, 15}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Sandboxels\"", "\": \"", "15"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Sandboxels", ": ", 15}], "Tooltip"]& ]}, 
+    {RGBColor[0.845080762195122, 0.9225410243902439, 0.7761998048780487], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{126., 15.}, {4.361228061924379, 7.286442005898049}],
+        Annotation[#, {{{121.63877193807562`, 130.36122806192438`}, {
+          7.713557994101952, 22.28644200589805}}, {126, 15, 15}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Color Water Sort 3D\"", "\": \"", "15"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Color Water Sort 3D", ": ", 15}], "Tooltip"]& ]}, 
+    {RGBColor[0.8367186707317074, 0.6151253048780487, 0.8669581951219513], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{23., 15.}, {4.361228061924379, 7.286442005898049}],
+        Annotation[#, {{{18.63877193807562, 27.36122806192438}, {
+          7.713557994101952, 22.28644200589805}}, {23, 15, 15}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Target Rush\"", "\": \"", "15"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Target Rush", ": ", 15}], "Tooltip"]& ]}, 
+    {RGBColor[0.817663518292683, 0.5943188719512195, 0.9278183780487805], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{18., 13.999999999999998`}, {4.2368389364039425, 7.0786211498456115}],
+        Annotation[#, {{{13.763161063596057`, 22.23683893640394}, {
+          6.921378850154387, 21.07862114984561}}, {18, 14, 14}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"The Bauble Factory\"", "\": \"", "14"}, "RowDefault"]],
+      
+      Annotation[#, 
+       Row[{"The Bauble Factory", ": ", 14}], "Tooltip"]& ]}, 
+    {RGBColor[0.790775243902439, 0.5401235487804877, 0.9482465609756098], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{10., 13.999999999999998`}, {4.236838936403943, 7.0786211498456115}],
+        Annotation[#, {{{5.763161063596057, 14.236838936403943`}, {
+          6.921378850154387, 21.07862114984561}}, {10, 14, 14}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tug of War with Cars\"", "\": \"", "14"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tug of War with Cars", ": ", 14}], "Tooltip"]& ]}, 
+    {RGBColor[0.5626681951219512, 0.7834982195121951, 0.9499532439024391], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{153., 13.999999999999998`}, {4.236838936403956, 7.0786211498456115}],
+        Annotation[#, {{{148.76316106359604`, 157.23683893640396`}, {
+          6.921378850154387, 21.07862114984561}}, {153, 14, 14}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"ASCII Shooter\"", "\": \"", "14"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"ASCII Shooter", ": ", 14}], "Tooltip"]& ]}, 
+    {RGBColor[0.5079297804878049, 0.7527793780487805, 0.9404214756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{158., 13.999999999999998`}, {4.236838936403956, 7.0786211498456115}],
+        Annotation[#, {{{153.76316106359604`, 162.23683893640396`}, {
+          6.921378850154387, 21.07862114984561}}, {158, 14, 14}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"64 in 1 NES\"", "\": \"", "14"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"64 in 1 NES", ": ", 14}], "Tooltip"]& ]}, 
+    {RGBColor[0.9380907134146341, 0.9517292865853658, 0.6503884756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{108., 13.}, {4.107922153790156, 6.863235793527458}],
+        Annotation[#, {{{103.89207784620984`, 112.10792215379016`}, {
+          6.136764206472542, 19.86323579352746}}, {108, 13, 13}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"FNF: Bopcity\"", "\": \"", "13"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"FNF: Bopcity", ": ", 13}], "Tooltip"]& ]}, 
+    {RGBColor[0.9321736158536585, 0.7529738841463415, 0.6075494512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{58., 13.}, {4.107922153790156, 6.863235793527458}],
+        Annotation[#, {{{53.892077846209844`, 62.107922153790156`}, {
+          6.136764206472542, 19.86323579352746}}, {58, 13, 13}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Sushiria\"", "\": \"", "13"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Sushiria", ": ", 13}], "Tooltip"]& ]}, 
+    {RGBColor[0.901572975609756, 0.6899212926829268, 0.6702082926829268], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{43., 13.}, {4.107922153790156, 6.863235793527458}],
+        Annotation[#, {{{38.892077846209844`, 47.107922153790156`}, {
+          6.136764206472542, 19.86323579352746}}, {43, 13, 13}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Road Race 2\"", "\": \"", "13"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Road Race 2", ": ", 13}], "Tooltip"]& ]}, 
+    {RGBColor[0.8900610731707317, 0.6760441219512195, 0.7035651219512195], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{39., 13.}, {4.107922153790156, 6.863235793527458}],
+        Annotation[#, {{{34.892077846209844`, 43.107922153790156`}, {
+          6.136764206472542, 19.86323579352746}}, {39, 13, 13}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Sandspiel\"", "\": \"", "13"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Sandspiel", ": ", 13}], "Tooltip"]& ]}, 
+    {RGBColor[0.5845635609756098, 0.7957857560975611, 0.9537659512195121], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{151., 13.}, {4.107922153790156, 6.863235793527458}],
+        Annotation[#, {{{146.89207784620984`, 155.10792215379016`}, {
+          6.136764206472542, 19.86323579352746}}, {151, 13, 13}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Bad Parenting 1\"", "\": \"", "13"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Bad Parenting 1", ": ", 13}], "Tooltip"]& ]}, 
+    {RGBColor[0.9117814268292682, 0.7049405731707317, 0.6433256097560975], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{47., 12.}, {3.9739440764241607, 6.639394371586697}],
+        Annotation[#, {{{43.02605592357584, 50.97394407642416}, {
+          5.360605628413304, 18.639394371586697`}}, {47, 12, 12}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Pou\"", "\": \"", "12"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Pou", ": ", 12}], "Tooltip"]& ]}, 
+    {RGBColor[0.7727208170731708, 0.8881566341463414, 0.8546609268292682], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{135., 12.}, {3.973944076424175, 6.639394371586697}],
+        Annotation[#, {{{131.02605592357583`, 138.97394407642417`}, {
+          5.360605628413304, 18.639394371586697`}}, {135, 12, 12}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Candy Crush\"", "\": \"", "12"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Candy Crush", ": ", 12}], "Tooltip"]& ]}, 
+    {RGBColor[0.737850262195122, 0.8711887012195122, 0.875007237804878], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{138., 12.}, {3.973944076424175, 6.639394371586697}],
+        Annotation[#, {{{134.02605592357583`, 141.97394407642417`}, {
+          5.360605628413304, 18.639394371586697`}}, {138, 12, 12}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"BMP Test\"", "\": \"", "12"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"BMP Test", ": ", 12}], "Tooltip"]& ]}, 
+    {RGBColor[0.9579195670731707, 0.8731030243902439, 0.5901996585365854], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{82., 10.}, {3.6880629149103186, 6.161763650520907}],
+        Annotation[#, {{{78.31193708508968, 85.68806291491032}, {
+          3.838236349479093, 16.161763650520907`}}, {82, 10, 10}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{
+        "\"Milk Inside a Bag of Milk Inside a Bag of Milk\"", "\": \"", "10"},
+         "RowDefault"]],
+      Annotation[#, 
+       Row[{"Milk Inside a Bag of Milk Inside a Bag of Milk", ": ", 10}], 
+       "Tooltip"]& ]}, 
+    {RGBColor[0.9469302439024391, 0.8081063414634146, 0.5923745609756098], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{69., 10.}, {3.6880629149103186, 6.161763650520907}],
+        Annotation[#, {{{65.31193708508968, 72.68806291491032}, {
+          3.838236349479093, 16.161763650520907`}}, {69, 10, 10}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"OMORI\"", "\": \"", "10"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"OMORI", ": ", 10}], "Tooltip"]& ]}, 
+    {RGBColor[0.9266121097560975, 0.7398738902439024, 0.6173065853658537], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{55., 10.}, {3.6880629149103186, 6.161763650520907}],
+        Annotation[#, {{{51.31193708508968, 58.68806291491032}, {
+          3.838236349479093, 16.161763650520907`}}, {55, 10, 10}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Parappa The Rapper\"", "\": \"", "10"}, "RowDefault"]],
+      
+      Annotation[#, 
+       Row[{"Parappa The Rapper", ": ", 10}], "Tooltip"]& ]}, 
+    {RGBColor[0.7807608109756098, 0.8919771219512195, 0.8459430243902438], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{134., 10.}, {3.688062914910347, 6.161763650520907}],
+        Annotation[#, {{{130.31193708508965`, 137.68806291491035`}, {
+          3.838236349479093, 16.161763650520907`}}, {134, 10, 10}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Captain Callisto\"", "\": \"", "10"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Captain Callisto", ": ", 10}], "Tooltip"]& ]}, 
+    {RGBColor[0.9584254999999999, 0.877884, 0.5906629999999999], EdgeForm[{
+     GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{83., 9.}, {3.534357003855689, 5.90496231131986}],
+        Annotation[#, {{{79.46564299614431, 86.53435700385569}, {
+          3.09503768868014, 14.90496231131986}}, {83, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Melon Playground\"", "\": \"", "9"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Melon Playground", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.9579232195121951, 0.9256505243902439, 0.6063032804878049], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{95., 9.}, {3.534357003855689, 5.90496231131986}],
+        Annotation[#, {{{91.46564299614431, 98.53435700385569}, {
+          3.09503768868014, 14.90496231131986}}, {95, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Helios Proxy\"", "\": \"", "9"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Helios Proxy", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.9551025243902439, 0.9336540304878049, 0.614346225609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{98., 9.}, {3.534357003855689, 5.90496231131986}],
+        Annotation[#, {{{94.46564299614431, 101.53435700385569`}, {
+          3.09503768868014, 14.90496231131986}}, {98, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Growden.io\"", "\": \"", "9"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Growden.io", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.8290007743902439, 0.9149000487804878, 0.7936356097560975], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{128., 9.}, {3.534357003855689, 5.90496231131986}],
+        Annotation[#, {{{124.46564299614431`, 131.5343570038557}, {
+          3.09503768868014, 14.90496231131986}}, {128, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Chicken Game 5: egg armageddon\"", "\": \"", "9"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chicken Game 5: egg armageddon", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.8252855792682927, 0.6026414451219512, 0.9034743048780488], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{20., 9.}, {3.534357003855682, 5.90496231131986}],
+        Annotation[#, {{{16.465642996144318`, 23.534357003855682`}, {
+          3.09503768868014, 14.90496231131986}}, {20, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Terraria\"", "\": \"", "9"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Terraria", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.5188774634146341, 0.7589231463414634, 0.9423278292682927], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{157., 9.}, {3.534357003855689, 5.90496231131986}],
+        Annotation[#, {{{153.4656429961443, 160.5343570038557}, {
+          3.09503768868014, 14.90496231131986}}, {157, 9, 9}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Adjustable Fireworks\"", "\": \"", "9"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Adjustable Fireworks", ": ", 9}], "Tooltip"]& ]}, 
+    {RGBColor[0.9619670304878049, 0.9113508292682927, 0.5939063902439025], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{90., 8.}, {3.371846864901329, 5.633451469408316}],
+        Annotation[#, {{{86.62815313509867, 93.37184686490133}, {
+          2.3665485305916842`, 13.633451469408316`}}, {90, 8, 8}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Kittytoy\"", "\": \"", "8"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Kittytoy", ": ", 8}], "Tooltip"]& ]}, 
+    {RGBColor[0.9548839695121951, 0.8444171707317073, 0.5874196097560975], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{76., 8.}, {3.371846864901329, 5.633451469408316}],
+        Annotation[#, {{{72.62815313509867, 79.37184686490133}, {
+          2.3665485305916842`, 13.633451469408316`}}, {76, 8, 8}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minecraft Platformer - Online\"", "\": \"", "8"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minecraft Platformer - Online", ": ", 8}], "Tooltip"]& ]}, 
+    {RGBColor[0.9154890975609756, 0.7136739024390244, 0.6368208536585366], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{49., 8.}, {3.371846864901329, 5.633451469408316}],
+        Annotation[#, {{{45.62815313509867, 52.37184686490133}, {
+          2.3665485305916842`, 13.633451469408316`}}, {49, 8, 8}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Postal\"", "\": \"", "8"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Postal", ": ", 8}], "Tooltip"]& ]}, 
+    {RGBColor[0.7888008048780488, 0.8957976097560976, 0.8372251219512195], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{133., 8.}, {3.371846864901329, 5.633451469408316}],
+        Annotation[#, {{{129.62815313509867`, 136.37184686490133`}, {
+          2.3665485305916842`, 13.633451469408316`}}, {133, 8, 8}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Car Anatomy\"", "\": \"", "8"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Car Anatomy", ": ", 8}], "Tooltip"]& ]}, 
+    {RGBColor[0.9616841463414634, 0.9149791829268292, 0.5955793536585365], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{91., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{87.80117973864006, 94.19882026135994}, {
+          1.6556295633376603`, 12.34437043666234}}, {91, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"JS Racer\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"JS Racer", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.9609551646341463, 0.9017888780487805, 0.5929797073170732], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{88., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{84.80117973864006, 91.19882026135994}, {
+          1.6556295633376603`, 12.34437043666234}}, {88, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Learn to fly\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Learn to fly", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.9607439146341463, 0.9176470182926829, 0.5982603353658537], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{92., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{88.80117973864006, 95.19882026135994}, {
+          1.6556295633376603`, 12.34437043666234}}, {92, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Jelly Mario\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Jelly Mario", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.9457502256097561, 0.8028908658536585, 0.593163743902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{68., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{64.80117973864006, 71.19882026135994}, {
+          1.6556295633376603`, 12.34437043666234}}, {68, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"OOF Clicker\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"OOF Clicker", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.8998247987804878, 0.9457752012195122, 0.7122178658536585], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{118., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{114.80117973864006`, 121.19882026135994`}, {
+          1.6556295633376603`, 12.34437043666234}}, {118, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Cuphead\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Cuphead", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.6904314085365855, 0.8480911158536586, 0.9016360914634146], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{142., 7.}, {3.1988202613599412, 5.34437043666234}],
+        Annotation[#, {{{138.80117973864006`, 145.19882026135994`}, {
+          1.6556295633376603`, 12.34437043666234}}, {142, 7, 7}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Black Hole Square\"", "\": \"", "7"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Black Hole Square", ": ", 7}], "Tooltip"]& ]}, 
+    {RGBColor[0.9358812865853658, 0.7617072134146341, 0.6010446951219512], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{60., 6.}, {3.012925523129141, 5.033790203276739}],
+        Annotation[#, {{{56.98707447687086, 63.01292552312914}, {
+          0.9662097967232608, 11.03379020327674}}, {60, 6, 6}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Freezeria\"", "\": \"", "6"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Freezeria", ": ", 6}], "Tooltip"]& ]}, 
+    {RGBColor[0.9044509512195121, 0.6933905853658536, 0.6618690853658536], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{44., 6.}, {3.012925523129141, 5.033790203276739}],
+        Annotation[#, {{{40.98707447687086, 47.01292552312914}, {
+          0.9662097967232608, 11.03379020327674}}, {44, 6, 6}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Railroad Runner\"", "\": \"", "6"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Railroad Runner", ": ", 6}], "Tooltip"]& ]}, 
+    {RGBColor[0.9492902804878048, 0.8185372926829269, 0.5907961951219513], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{71., 5.}, {2.8107770152092257, 4.696054281508101}],
+        Annotation[#, {{{68.18922298479077, 73.81077701520923}, {
+          0.30394571849189944`, 9.6960542815081}}, {71, 5, 5}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Nau1lous\"", "\": \"", "5"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Nau1lous", ": ", 5}], "Tooltip"]& ]}, 
+    {RGBColor[0.8692007439024391, 0.934002487804878, 0.7500460975609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{123., 5.}, {2.8107770152092257, 4.696054281508101}],
+        Annotation[#, {{{120.18922298479077`, 125.81077701520923`}, {
+          0.30394571849189944`, 9.6960542815081}}, {123, 5, 5}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Cooking Mama\"", "\": \"", "5"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Cooking Mama", ": ", 5}], "Tooltip"]& ]}, 
+    {RGBColor[0.820960780487805, 0.9110795609756097, 0.802353512195122], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{129., 5.}, {2.8107770152092257, 4.696054281508101}],
+        Annotation[#, {{{126.18922298479077`, 131.81077701520923`}, {
+          0.30394571849189944`, 9.6960542815081}}, {129, 5, 5}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Chicken Game 4: A Space Odyssey\"", "\": \"", "5"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chicken Game 4: A Space Odyssey", ": ", 5}], "Tooltip"]& ]}, 
+    {RGBColor[0.8129207865853659, 0.9072590731707317, 0.8110714146341463], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{130., 5.}, {2.8107770152092257, 4.696054281508101}],
+        Annotation[#, {{{127.18922298479077`, 132.81077701520923`}, {
+          0.30394571849189944`, 9.6960542815081}}, {130, 5, 5}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{
+        "\"Chicken Game 3: industrial revolution\"", "\": \"", "5"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Chicken Game 3: industrial revolution", ": ", 5}], 
+       "Tooltip"]& ]}, 
+    {RGBColor[0.6430125548780489, 0.8249935304878049, 0.9282649451219512], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{146., 5.}, {2.8107770152092257, 4.696054281508101}],
+        Annotation[#, {{{143.18922298479077`, 148.81077701520923`}, {
+          0.30394571849189944`, 9.6960542815081}}, {146, 5, 5}, {}}, 
+         "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Beepbox\"", "\": \"", "5"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Beepbox", ": ", 5}], "Tooltip"]& ]}, 
+    {RGBColor[0.9558958353658537, 0.8539791219512195, 0.5883462926829268], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{78., 4.}, {2.5871785019278377, 4.322481155659931}],
+        Annotation[#, {{{75.41282149807216, 
+          80.58717850192784}, {-0.32248115565993096`, 8.322481155659931}}, {
+          78, 4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Minecraft Indev\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Minecraft Indev", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.9494611341463415, 0.9496610426829268, 0.6304321158536585], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{104., 4.}, {2.5871785019278377, 4.322481155659931}],
+        Annotation[#, {{{101.41282149807216`, 
+          106.58717850192784`}, {-0.32248115565993096`, 8.322481155659931}}, {
+          104, 4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Glueification!\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Glueification!", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.9433901890243903, 0.7924599146341463, 0.5947421097560975], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{66., 4.}, {2.5871785019278413, 4.322481155659931}],
+        Annotation[#, {{{63.412821498072155`, 
+          68.58717850192784}, {-0.32248115565993096`, 8.322481155659931}}, {
+          66, 4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa Louie 1\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa Louie 1", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.9340274512195123, 0.7573405487804878, 0.6042970731707318], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{59., 4.}, {2.5871785019278377, 4.322481155659931}],
+        Annotation[#, {{{56.41282149807216, 
+          61.58717850192784}, {-0.32248115565993096`, 8.322481155659931}}, {
+          59, 4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Hotdoggeria\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Hotdoggeria", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.918957756097561, 0.9487522439024391, 0.6813031707317073], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{113., 4.}, {2.5871785019278377, 4.322481155659931}],
+        Annotation[#, {{{110.41282149807216`, 
+          115.58717850192784`}, {-0.32248115565993096`, 8.322481155659931}}, {
+          113, 4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Famidash\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Famidash", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.7779680243902439, 0.5093273048780488, 0.944846756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{6., 4.}, {2.5871785019278413, 4.322481155659931}],
+        Annotation[#, {{{3.4128214980721587`, 
+          8.587178501927841}, {-0.32248115565993096`, 8.322481155659931}}, {6,
+           4, 4}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Waterworks!\"", "\": \"", "4"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Waterworks!", ": ", 4}], "Tooltip"]& ]}, 
+    {RGBColor[0.9410301524390244, 0.7820289634146341, 0.5963204756097561], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{64., 2.9999999999999996`}, {2.333382787248155, 3.898456607963382}],
+        Annotation[#, {{{61.666617212751845`, 
+          66.33338278724815}, {-0.8984566079633822, 6.898456607963381}}, {64, 
+          3, 3}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Burgeria\"", "\": \"", "3"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Burgeria", ": ", 3}], "Tooltip"]& ]}, 
+    {RGBColor[0.8003806585365855, 0.563220731707317, 0.9507964146341463], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{13., 2.9999999999999996`}, {2.3333827872481567, 3.898456607963382}],
+        Annotation[#, {{{10.666617212751843`, 
+          15.333382787248157`}, {-0.8984566079633822, 6.898456607963381}}, {
+          13, 3, 3}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Tomodatchi Collection\"", "\": \"", "3"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Tomodatchi Collection", ": ", 3}], "Tooltip"]& ]}, 
+    {RGBColor[0.7022861219512195, 0.853865512195122, 0.8949788780487804], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{141., 2.9999999999999996`}, {2.333382787248155, 3.898456607963382}],
+        Annotation[#, {{{138.66661721275185`, 
+          143.33338278724815`}, {-0.8984566079633822, 6.898456607963381}}, {
+          141, 3, 3}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Block Blast\"", "\": \"", "3"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Block Blast", ": ", 3}], "Tooltip"]& ]}, 
+    {RGBColor[0.9574136341463415, 0.8683220487804878, 0.5897363170731708], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{81., 2.}, {2.032334181486746, 3.3954851568741926}],
+        Annotation[#, {{{78.96766581851325, 
+          83.03233418148675}, {-1.3954851568741928`, 5.395485156874193}}, {81,
+           2, 2}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{
+        "\"Milk Outside A Bag Of Milk Outside A Bag Of Milk\"", "\": \"", 
+         "2"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Milk Outside A Bag Of Milk Outside A Bag Of Milk", ": ", 2}], 
+       "Tooltip"]& ]}, 
+    {RGBColor[0.9386701158536586, 0.7715980121951219, 0.5978988414634147], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{62., 2.}, {2.032334181486732, 3.3954851568741926}],
+        Annotation[#, {{{59.96766581851327, 
+          64.03233418148673}, {-1.3954851568741928`, 5.395485156874193}}, {62,
+           2, 2}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Cupcakeria\"", "\": \"", "2"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Cupcakeria", ": ", 2}], "Tooltip"]& ]}, 
+    {RGBColor[0.9374900975609757, 0.7663825365853658, 0.5986880243902439], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{61., 2.}, {2.032334181486739, 3.3954851568741926}],
+        Annotation[#, {{{58.96766581851326, 
+          63.03233418148674}, {-1.3954851568741928`, 5.395485156874193}}, {61,
+           2, 2}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa's Donuteria\"", "\": \"", "2"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa's Donuteria", ": ", 2}], "Tooltip"]& ]}, 
+    {RGBColor[0.7971788536585367, 0.5555216707317073, 0.9499464634146342], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{12., 2.}, {2.0323341814867426, 3.3954851568741926}],
+        Annotation[#, {{{9.967665818513257, 
+          14.032334181486743`}, {-1.3954851568741928`, 5.395485156874193}}, {
+          12, 2, 2}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Touhou: Luminous Strike\"", "\": \"", "2"}, 
+        "RowDefault"]],
+      Annotation[#, 
+       Row[{"Touhou: Luminous Strike", ": ", 2}], "Tooltip"]& ]}, 
+    {RGBColor[0.9504013658536585, 0.9469932073170731, 0.6277511341463414], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{103., 1.}, {1.6400000000000006, 2.74}],
+        Annotation[#, {{{101.36, 104.64}, {-1.7400000000000002`, 3.74}}, {103,
+           1, 1}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"GN\"", "\": \"", "1"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"GN", ": ", 1}], "Tooltip"]& ]}, 
+    {RGBColor[0.9422101707317073, 0.7872444390243902, 0.5955312926829268], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{65., 1.}, {1.6400000000000006, 2.74}],
+        Annotation[#, {{{63.36, 66.64}, {-1.7400000000000002`, 3.74}}, {65, 1,
+           1}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Papa Louie 2\"", "\": \"", "1"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Papa Louie 2", ": ", 1}], "Tooltip"]& ]}, 
+    {RGBColor[0.9136352621951219, 0.709307237804878, 0.640073231707317], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{48., 1.}, {1.6400000000000006, 2.74}],
+        Annotation[#, {{{46.36, 49.64}, {-1.7400000000000002`, 3.74}}, {48, 1,
+           1}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"Pou\"", "\": \"", "1"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"Pou", ": ", 1}], "Tooltip"]& ]}, 
+    {RGBColor[0.5736158780487806, 0.789641987804878, 0.9518595975609756], 
+     EdgeForm[{GrayLevel[0], Opacity[0.3]}], 
+     TagBox[
+      TooltipBox[
+       TagBox[DiskBox[{152., 1.}, {1.6399999999999864, 2.74}],
+        Annotation[#, {{{150.36, 153.64}, {-1.7400000000000002`, 3.74}}, {152,
+           1, 1}, {}}, "BubbleChartBubble"]& ],
+       TemplateBox[{"\"AstraClient-JS\"", "\": \"", "1"}, "RowDefault"]],
+      Annotation[#, 
+       Row[{"AstraClient-JS", ": ", 1}], 
+       "Tooltip"]& ]}}, {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, \
+{}, {}},
+  AspectRatio->1,
+  AxesLabel->{
+    FormBox[
+     TagBox["\"Game Index\"", HoldForm], TraditionalForm], 
+    FormBox[
+     TagBox["\"Total Plays\"", HoldForm], TraditionalForm]},
+  AxesOrigin->{-4.272731062950811, -1.7400000000000002`},
   DefaultBaseStyle->{"PlotGraphics", "Graphics"},
   DisplayFunction->Identity,
+  Frame->True,
   FrameLabel->{{None, None}, {None, None}},
   FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
   GridLines->{None, None},
@@ -662,23 +1960,26 @@ Cell[BoxData[
     GrayLevel[0.5, 0.4]],
   ImageSize->Large,
   PlotInteractivity:>True,
-  PlotLabel->FormBox["\"Top Games by Total Plays\"", TraditionalForm],
-  PlotRange->{{All, All}, {All, All}},
+  PlotLabel->FormBox["\"Total Plays per Game\"", TraditionalForm],
+  PlotRange->{{-4.272731062950811, 177.7672689370492}, {-1.7400000000000002`, 
+   302.40000000000003`}},
+  PlotRangeClipping->True,
   PlotRangePadding->{{
-     Scaled[0.02], 
-     Scaled[0.02]}, {
-     Scaled[0.02], 
+     Scaled[0.05], 
+     Scaled[0.05]}, {
+     Scaled[0.05], 
      Scaled[0.05]}},
-  Ticks->{None, Automatic}]], "Output",
+  Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{
   3.982297720852045*^9, 3.982297862378805*^9, 3.982297897600643*^9, {
    3.982297940339995*^9, 3.982297959295302*^9}, 3.982297992536254*^9, 
-   3.982298052545723*^9},
- CellLabel->"Out[57]=",ExpressionUUID->"6fb63aa5-9f68-41a6-bdbb-d2fe955f2f6a"]
+   3.982298052545723*^9, 3.9822981460487843`*^9},
+ CellLabel->"Out[63]=",ExpressionUUID->"11a76e4c-e6fd-4f6a-a405-311cc989ea20"]
 }, Open  ]]
 },
 WindowSize->{1440, 754.5},
 WindowMargins->{{Automatic, 960}, {Automatic, 0}},
+PrivateNotebookOptions->{"CloudPublishPath"->"/Published/BubbleChart.nb"},
 FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"6f2442ff-692d-4c98-901e-a7317e633c03"
@@ -695,12 +1996,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[1482, 35, 3934, 102, 434, "Input",ExpressionUUID->"f825ff6c-a8ed-4515-b899-a7296c9710b1"],
-Cell[5419, 139, 1899, 31, 71, "Message",ExpressionUUID->"b9152461-1019-4fa9-9fea-f7ba88673003"],
-Cell[7321, 172, 506, 12, 26, "Message",ExpressionUUID->"787be288-e6ed-4564-8bbb-656e1f170043"],
-Cell[7830, 186, 506, 12, 26, "Message",ExpressionUUID->"807d4952-6e72-416d-bc82-3c6483d6da2e"],
-Cell[8339, 200, 515, 12, 26, "Message",ExpressionUUID->"10dcce8e-a752-44c2-bedf-e56a98614d9a"],
-Cell[8857, 214, 17139, 462, 385, "Output",ExpressionUUID->"6fb63aa5-9f68-41a6-bdbb-d2fe955f2f6a"]
+Cell[1482, 35, 4011, 100, 374, "Input",ExpressionUUID->"f825ff6c-a8ed-4515-b899-a7296c9710b1"],
+Cell[5496, 137, 91480, 1839, 599, "Output",ExpressionUUID->"11a76e4c-e6fd-4f6a-a405-311cc989ea20"]
 }, Open  ]]
 }
 ]

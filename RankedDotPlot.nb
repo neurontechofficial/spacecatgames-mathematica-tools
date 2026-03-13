@@ -1,0 +1,1263 @@
+(* Content-type: application/vnd.wolfram.cdf.text *)
+
+(*** Wolfram CDF File ***)
+(* http://www.wolfram.com/cdf *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*************************************************************************)
+(*                                                                       *)
+(*                                                                       *)
+(*  This file was created under the Wolfram Enterprise licensing terms.  *)
+(*                                                                       *)
+(*       For additional information concerning CDF licensing see:        *)
+(*                                                                       *)
+(*        www.wolfram.com/cdf/adopting-cdf/licensing-options.html        *)
+(*                                                                       *)
+(*                                                                       *)
+(*                                                                       *)
+(*************************************************************************)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[      1060,         20]
+NotebookDataLength[     41487,       1240]
+NotebookOptionsPosition[     41910,       1236]
+NotebookOutlinePosition[     42302,       1252]
+CellTagsIndexPosition[     42259,       1249]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Published", " ", "CSV", " ", "link"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "sheetURL", 
+     "=", "\"\<https://docs.google.com/spreadsheets/d/e/2PACX-1vTf-\
+6AlCge2OKAs4JuAPi5cPtJWmGqjMy27zGyTheWlWiToV4MxwCel0E_YiMiK11QpF69v-EW8bi78/\
+pub?output=csv\>\""}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Import", " ", "the", " ", "data"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"data", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"sheetURL", ",", "\"\<CSV\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Separate", " ", "headers", " ", "and", " ", "values"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"values", "=", 
+     RowBox[{"Rest", "[", "data", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Clean", " ", "and", " ", "convert", " ", "total", " ", "plays", " ", 
+      "to", " ", "numbers"}], ",", 
+     RowBox[{
+      RowBox[{"replace", " ", 
+       RowBox[{"missing", "/", "non"}]}], "-", 
+      RowBox[{"numeric", " ", "with", " ", "0"}]}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"cleanValues", "=", 
+     RowBox[{"values", "/.", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"title_", ",", "count_"}], "}"}], ":>", 
+       RowBox[{"{", 
+        RowBox[{"title", ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringQ", "[", "count", "]"}], "&&", 
+            RowBox[{"StringMatchQ", "[", 
+             RowBox[{"count", ",", "NumberString"}], "]"}]}], ",", 
+           RowBox[{"ToExpression", "[", "count", "]"}], ",", "0"}], "]"}]}], 
+        "}"}]}]}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"sorted", "=", 
+     RowBox[{"Reverse", "@", 
+      RowBox[{"SortBy", "[", 
+       RowBox[{"cleanValues", ",", "Last"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Tooltip", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"sorted", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"sorted", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "1"}], "]"}], "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "sorted", "]"}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"PlotStyle", "->", "Red"}], ",", 
+     RowBox[{"PlotMarkers", "->", "Automatic"}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Rank\>\"", ",", "\"\<Total Plays\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotLabel", "->", "\"\<Game Plays by Rank\>\""}], ",", 
+     RowBox[{"ImageSize", "->", "Large"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.982413995276557*^9, 3.9824140905851517`*^9}, {
+  3.982414139321594*^9, 3.982414349815363*^9}},
+ CellLabel->"In[59]:=",ExpressionUUID->"a93b6872-0c2b-4a6d-8ffe-92644c5820c4"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {
+    TagBox[
+     {RGBColor[1, 0, 0], PointSize[0.009166666666666668], AbsoluteThickness[
+      2], GeometricTransformationBox[InsetBox[
+        FormBox[
+         StyleBox[
+          GraphicsBox[
+           {EdgeForm[None], DiskBox[{0, 0}]},
+           PlotRangePadding->Scaled[0.15]],
+          StripOnInput->False,
+          GraphicsBoxOptions->{DefaultBaseStyle->Directive[
+            PointSize[0.009166666666666668], 
+            AbsoluteThickness[2], 
+            RGBColor[1, 0, 0]]}],
+         TraditionalForm], {0., 0.}, Automatic, Offset[
+        10.976]], CompressedData["
+1:eJxdlklu1UAURQsyYZgBgwwYmC+EEIoQoe9T+ZDQd6EJfUwgA0ZIrOAtxRIb
+qaV4CSyBSD6nJFekr6vjZ1e9el3l9MHv3cOVlNLfo9+xo9/x5N/JPOkSXUNX
+0VPN8w69jy7QS+iZxn4WXUfPoc/Q82hq3juBXkCfoBcnDf3dQO80ftxCLzfr
+XuH7x/DV5hzXmu+uo3fRG3M/0k3We9Xsew+9jf3D3M/yZb5uPGi++4hu8v4v
+OM/3D7gc8nxr0uEHdji5/nLuZ42j35O3eIrKz5t11hu/iUPanvsRsn7voOQ9
+5AX6cNL8HjtcPmN/hFJHIf/bnNS8Uqc1z8bVOlpih4vx9tzuD5uHWrfuD9f8
+GyfzI1t/L1D6K2T76yVKP0TDyX3oiyy7nkw8SmNPr1H6JMv0ecj0cZGt612U
+uZFl9gm4vEG1m3+e2wdZNl9wrWvt+v8WO3HL8ED9Bmy8iuxceocu+F6mz6Ph
+Itv/1IXxsE5dz7rxvEV2bu6hxDs3HDJzpsDdT547R/Rfpr7rnGHulOb9Oles
+H9g8h3b62b4wH+kTSn1l2fqDa1/Bq394zz5mvSzjT8Cxz/fanbfMTfs6O0c9
+v0x9Omer/19R4ptl55XMvVBk8/cNNf8y91DA9l2BnRNpf+5flu0fGX+K7Pl7
+3iNfHVzrQWb9vuGQud8G2XqVOe8o2z/fUeZZB5vvrJ3662Xu85CZn4PMPVBk
++m2UnY8HKP3SydaDTP/2MvdIyMRjkKmfInOeEa71472Kvx1sPLJMf/SNPWT2
+85723iwy/4eM8gJ1Dhh/mXrNsvGHnUOhnXt7kOmTInPvj/Je/g+e2PFI
+       "]]},
+     Annotation[#, "Charting`Private`Tag#1"]& ], {
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{5., 36.}}]},
+       "\"Wordle\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Wordle", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{6., 4.}}]},
+       "\"Waterworks!\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Waterworks!", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{7., 6.}}]},
+       "\"WarioWare, Inc.: Mega Microgame$\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "WarioWare, Inc.: Mega Microgame$", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{8., 38.}}]},
+       "\"Warfare Area 3\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Warfare Area 3", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{9., 18.}}]},
+       "\"Twisted Rope 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Twisted Rope 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{10., 38.}}]},
+       "\"Tunnel Rush\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tunnel Rush", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{11., 14.}}]},
+       "\"Tug of War with Cars\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tug of War with Cars", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{12., 56.}}]},
+       "\"Truck Space 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Truck Space 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{13., 2.}}]},
+       "\"Touhou: Luminous Strike\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Touhou: Luminous Strike", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{14., 3.}}]},
+       "\"Tomodatchi Collection\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tomodatchi Collection", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{15., 52.}}]},
+       "\"Time Shooter 3\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Time Shooter 3", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{16., 37.}}]},
+       "\"The Typing Game\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "The Typing Game", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{17., 28.}}]},
+       "\"There is no game\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "There is no game", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{18., 26.}}]},
+       "\"\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, 
+       "\|01f911\|01f4b0\|01f4b8The Fruits\|01f911\|01f4b0\|01f4b8", 
+       "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{19., 14.}}]},
+       "\"The Bauble Factory\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "The Bauble Factory", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{20., 51.}}]},
+       "\"Tetris\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tetris", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{21., 9.}}]},
+       "\"Terraria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Terraria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{22., 19.}}]},
+       "\"Telekinesis Drive\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Telekinesis Drive", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{23., 29.}}]},
+       "\"Telekinesis Car\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Telekinesis Car", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{24., 16.}}]},
+       "\"Target Rush\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Target Rush", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{25., 66.}}]},
+       "\"Tanuki Sunset\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tanuki Sunset", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{26., 30.}}]},
+       "\"SuperTuxKart\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "SuperTuxKart", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{27., 98.}}]},
+       "\"Subway Surfers\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Subway Surfers", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{28., 115.}}]},
+       "\"Stickman Hook\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Stickman Hook", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{29., 41.}}]},
+       "\"Steal Brainrot Online\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Steal Brainrot Online", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{30., 100.}}]},
+       "\"Stack\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Stack", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{31., 206.}}]},
+       "\"Space Waves\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Space Waves", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{32., 16.}}]},
+       "\"Spacebar Clicker\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Spacebar Clicker", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{33., 174.}}]},
+       "\"Soundboard\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Soundboard", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{34., 157.}}]},
+       "\"Snow Rider 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Snow Rider 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{35., 40.}}]},
+       "\"Slowroads\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Slowroads", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{36., 26.}}]},
+       "\"Slope 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Slope 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{37., 168.}}]},
+       "\"Slope\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Slope", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{38., 55.}}]},
+       "\"Slither.io\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Slither.io", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{39., 59.}}]},
+       "\"Sandtris\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Sandtris", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{40., 14.}}]},
+       "\"Sandspiel\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Sandspiel", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{41., 25.}}]},
+       "\"Sandboxels\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Sandboxels", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{42., 34.}}]},
+       "\"Sand:box\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Sand:box", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{43., 32.}}]},
+       "\"roberto simulator\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "roberto simulator", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{44., 13.}}]},
+       "\"Road Race 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Road Race 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{45., 9.}}]},
+       "\"Railroad Runner\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Railroad Runner", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{46., 89.}}]},
+       "\"Ragdoll Hit\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Ragdoll Hit", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{47., 111.}}]},
+       "\"Ragdoll Archers\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Ragdoll Archers", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{48., 12.}}]},
+       "\"Pou\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Pou", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{49., 1.}}]},
+       "\"Pou\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Pou", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{50., 8.}}]},
+       "\"Postal\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Postal", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{51., 30.}}]},
+       "\"Please Don't Touch Anything\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Please Don't Touch Anything", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{52., 36.}}]},
+       "\"Ping Pong\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Ping Pong", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{53., 103.}}]},
+       "\"Pick a Lock\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Pick a Lock", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{54., 90.}}]},
+       "\"People Playground\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "People Playground", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{55., 31.}}]},
+       "\"Peggle\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Peggle", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{56., 12.}}]},
+       "\"Parappa The Rapper\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Parappa The Rapper", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{57., 66.}}]},
+       "\"Paper.io 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Paper.io 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{58., 16.}}]},
+       "\"Paperception\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Paperception", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{59., 14.}}]},
+       "\"Papa's Sushiria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Sushiria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{60., 4.}}]},
+       "\"Papa's Hotdoggeria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Hotdoggeria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{61., 6.}}]},
+       "\"Papa's Freezeria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Freezeria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{62., 2.}}]},
+       "\"Papa's Donuteria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Donuteria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{63., 2.}}]},
+       "\"Papa's Cupcakeria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Cupcakeria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{64., 15.}}]},
+       "\"Papa's Cheeseria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Cheeseria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{65., 4.}}]},
+       "\"Papa's Burgeria\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa's Burgeria", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{66., 1.}}]},
+       "\"Papa Louie 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa Louie 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{67., 4.}}]},
+       "\"Papa Louie 1\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Papa Louie 1", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{68., 18.}}]},
+       "\"osu!\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "osu!", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{69., 7.}}]},
+       "\"OOF Clicker\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "OOF Clicker", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{70., 10.}}]},
+       "\"OMORI\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "OMORI", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{71., 26.}}]},
+       "\"Office Fight\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Office Fight", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{72., 5.}}]},
+       "\"Nau1lous\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Nau1lous", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{73., 64.}}]},
+       "\"MotoX3M\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "MotoX3M", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{74., 79.}}]},
+       "\"Monkey Mart\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Monkey Mart", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{75., 32.}}]},
+       "\"Minesweeper\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minesweeper", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{76., 28.}}]},
+       "\"Miner Cat\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Miner Cat", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{77., 8.}}]},
+       "\"Minecraft Platformer - Online\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minecraft Platformer - Online", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{78., 33.}}]},
+       "\"Minecraft Platformer\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minecraft Platformer", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{79., 4.}}]},
+       "\"Minecraft Indev\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minecraft Indev", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{80., 61.}}]},
+       "\"Minecraft 1.21\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minecraft 1.21", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{81., 173.}}]},
+       "\"Minecraft\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Minecraft", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{82., 2.}}]},
+       "\"Milk Outside A Bag Of Milk Outside A Bag Of Milk\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Milk Outside A Bag Of Milk Outside A Bag Of Milk", 
+       "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{83., 10.}}]},
+       "\"Milk Inside a Bag of Milk Inside a Bag of Milk\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Milk Inside a Bag of Milk Inside a Bag of Milk", 
+       "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{84., 9.}}]},
+       "\"Melon Playground\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Melon Playground", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{85., 23.}}]},
+       "\"Maze\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Maze", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{86., 23.}}]},
+       "\"maz ball\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "maz ball", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{87., 29.}}]},
+       "\"Make a Superboat!\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Make a Superboat!", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{88., 26.}}]},
+       "\"Learn to Fly 3\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Learn to Fly 3", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{89., 9.}}]},
+       "\"Learn to fly\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Learn to fly", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{90., 32.}}]},
+       "\"Layers Roll\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Layers Roll", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{91., 8.}}]},
+       "\"Kittytoy\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Kittytoy", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{92., 7.}}]},
+       "\"JS Racer\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "JS Racer", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{93., 7.}}]},
+       "\"Jelly Mario\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Jelly Mario", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{94., 24.}}]},
+       "\"Jelly Drift\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Jelly Drift", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{95., 161.}}]},
+       "\"Hypper Sandbox\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Hypper Sandbox", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{96., 9.}}]},
+       "\"Helios Proxy\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Helios Proxy", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{97., 30.}}]},
+       "\"Happy Wheels\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Happy Wheels", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{98., 27.}}]},
+       "\"Half-Life 1\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Half-Life 1", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{99., 9.}}]},
+       "\"Growden.io\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Growden.io", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{100., 15.}}]},
+       "\"Granny 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Granny 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{101., 71.}}]},
+       "\"Granny\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Granny", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{102., 25.}}]},
+       "\"Google Feud\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Google Feud", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{103., 33.}}]},
+       "\"Going Balls\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Going Balls", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{104., 1.}}]},
+       "\"GN\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "GN", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{105., 4.}}]},
+       "\"Glueification!\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Glueification!", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{106., 53.}}]},
+       "\"Getting Over It\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Getting Over It", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{107., 289.}}]},
+       "\"Geometry Dash\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Geometry Dash", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{108., 32.}}]},
+       "\"gamble1928\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "gamble1928", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{109., 15.}}]},
+       "\"FNF: Bopcity\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "FNF: Bopcity", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{110., 126.}}]},
+       "\"FNAF 1\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "FNAF 1", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{111., 16.}}]},
+       "\"Five nights at Winston's\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Five nights at Winston's", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{112., 51.}}]},
+       "\"Five Nights at Epstein's\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Five Nights at Epstein's", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{113., 30.}}]},
+       "\"Fifa 11\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Fifa 11", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{114., 5.}}]},
+       "\"Famidash\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Famidash", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{115., 33.}}]},
+       "\"Evolving Bombs 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Evolving Bombs 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{116., 24.}}]},
+       "\"DOOM\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "DOOM", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{117., 34.}}]},
+       "\"Doodle Jump\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Doodle Jump", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{118., 21.}}]},
+       "\"DON'T YOU LECTURE ME\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "DON'T YOU LECTURE ME", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{119., 8.}}]},
+       "\"Cuphead\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Cuphead", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{120., 26.}}]},
+       "\"Cubit\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Cubit", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{121., 17.}}]},
+       "\"Crazy Kitty 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Crazy Kitty 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{122., 67.}}]},
+       "\"Crazy Cattle 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Crazy Cattle 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{123., 57.}}]},
+       "\"Coreball\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Coreball", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{124., 5.}}]},
+       "\"Cooking Mama\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Cooking Mama", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{125., 64.}}]},
+       "\"Cookie Clicker\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Cookie Clicker", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{126., 34.}}]},
+       "\"Connect The Pipes\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Connect The Pipes", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{127., 16.}}]},
+       "\"Color Water Sort 3D\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Color Water Sort 3D", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{128., 70.}}]},
+       "\"Chrome Dino\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chrome Dino", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{129., 9.}}]},
+       "\"Chicken Game 5: egg armageddon\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chicken Game 5: egg armageddon", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{130., 5.}}]},
+       "\"Chicken Game 4: A Space Odyssey\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chicken Game 4: A Space Odyssey", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{131., 5.}}]},
+       "\"Chicken Game 3: industrial revolution\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chicken Game 3: industrial revolution", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{132., 19.}}]},
+       "\"Chicken Game 2\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chicken Game 2", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{133., 32.}}]},
+       "\"Chess Classic\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Chess Classic", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{134., 8.}}]},
+       "\"Car Anatomy\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Car Anatomy", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{135., 10.}}]},
+       "\"Captain Callisto\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Captain Callisto", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{136., 14.}}]},
+       "\"Candy Crush\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Candy Crush", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{137., 53.}}]},
+       "\"Build a Plane\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Build a Plane", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{138., 27.}}]},
+       "\"Buckshot Roulette\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Buckshot Roulette", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{139., 3.}}]},
+       "\"Breaklock\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Breaklock", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{140., 12.}}]},
+       "\"BMP Test\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "BMP Test", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{141., 44.}}]},
+       "\"Bloxorz\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Bloxorz", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{142., 29.}}]},
+       "\"Blocky Snakes\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Blocky Snakes", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{143., 6.}}]},
+       "\"Block Blast\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Block Blast", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{144., 7.}}]},
+       "\"Black Hole Square\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Black Hole Square", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{145., 50.}}]},
+       "\"BitPlanes\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "BitPlanes", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{146., 23.}}]},
+       "\"Bergentruck 201x\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Bergentruck 201x", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{147., 46.}}]},
+       "\"Bendy and the Ink Machine\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Bendy and the Ink Machine", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{148., 5.}}]},
+       "\"Beepbox\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Beepbox", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{149., 30.}}]},
+       "\"Basketball Stars\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Basketball Stars", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{150., 52.}}]},
+       "\"Basketball Random\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Basketball Random", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{151., 33.}}]},
+       "\"Ball Blast\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Ball Blast", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{152., 45.}}]},
+       "\"Baldi's Basics Plus\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Baldi's Basics Plus", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{153., 14.}}]},
+       "\"Bad Parenting 1\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Bad Parenting 1", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{154., 1.}}]},
+       "\"AstraClient-JS\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "AstraClient-JS", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{155., 14.}}]},
+       "\"ASCII Shooter\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "ASCII Shooter", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{156., 30.}}]},
+       "\"Amaze\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Amaze", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{157., 42.}}]},
+       "\"AI Music Creator\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "AI Music Creator", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{158., 22.}}]},
+       "\"Ages of Conflict\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Ages of Conflict", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{159., 9.}}]},
+       "\"Adjustable Fireworks\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Adjustable Fireworks", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{160., 14.}}]},
+       "\"64 in 1 NES\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "64 in 1 NES", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{161., 21.}}]},
+       "\"3D Plane Game\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "3D Plane Game", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{162., 27.}}]},
+       "\"2048 Merge Run\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "2048 Merge Run", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{163., 91.}}]},
+       "\"The Hardest Game\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "The Hardest Game", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{164., 40.}}]},
+       "\"FIFA 2007\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "FIFA 2007", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{165., 112.}}]},
+       "\"Tap Goal\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Tap Goal", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{166., 38.}}]},
+       "\"Circloo\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Circloo", "Tooltip"]& ], 
+     TagBox[
+      TooltipBox[
+       {Opacity[0.], PointBox[{{167., 92.}}]},
+       "\"Suika Game\"",
+       TooltipStyle->"TextStyling"],
+      Annotation[#, "Suika Game", "Tooltip"]& ]}}, {{}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox[
+     TagBox["\"Rank\"", HoldForm], TraditionalForm], 
+    FormBox[
+     TagBox["\"Total Plays\"", HoldForm], TraditionalForm]},
+  AxesOrigin->{0, 0},
+  DefaultBaseStyle->{"PlotGraphics", "Graphics"},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->Large,
+  Method->{
+   "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "DefaultPlotStyle" -> {
+      Directive[
+       RGBColor[0.24, 0.6, 0.8], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.95, 0.627, 0.1425], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.455, 0.7, 0.21], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.922526, 0.385626, 0.209179], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.578, 0.51, 0.85], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.772079, 0.431554, 0.102387], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.4, 0.64, 1.], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[1., 0.75, 0.], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.8, 0.4, 0.76], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.637, 0.65, 0.], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.915, 0.3325, 0.2125], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.40082222609352647`, 0.5220066643438841, 0.85], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.9728288904374106, 0.621644452187053, 0.07336199581899142], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.736782672705901, 0.358, 0.5030266573755369], 
+       AbsoluteThickness[2]], 
+      Directive[
+       RGBColor[0.28026441037696703`, 0.715, 0.4292089322474965], 
+       AbsoluteThickness[2]]}, "DomainPadding" -> Scaled[0.02], 
+    "PointSizeFunction" -> "SmallPointSize", "RangePadding" -> Scaled[0.05], 
+    "OptimizePlotMarkers" -> True, "IncludeHighlighting" -> Automatic, 
+    "HighlightStyle" -> Automatic, "OptimizePlotMarkers" -> True, 
+    "IncludeHighlighting" -> "CurrentPoint", "HighlightStyle" -> Automatic, 
+    "OptimizePlotMarkers" -> True, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotInteractivity:>True,
+  PlotLabel->FormBox["\"Game Plays by Rank\"", TraditionalForm],
+  PlotRange->{{0, 167.}, {0, 132.}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.982414097407536*^9, 3.982414200493866*^9, {3.982414231808028*^9, 
+   3.982414275251268*^9}, 3.982414306980872*^9, {3.9824143422503853`*^9, 
+   3.982414352464787*^9}},
+ CellLabel->"Out[64]=",ExpressionUUID->"22fd3ffd-9534-42b2-8e76-4105e04e17f1"]
+}, Open  ]]
+},
+WindowSize->{1440, 754.5},
+WindowMargins->{{Automatic, 960}, {Automatic, 0}},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d333e2da-e42d-4c42-8aa4-62a1e73058dd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[1482, 35, 3118, 81, 333, "Input",ExpressionUUID->"a93b6872-0c2b-4a6d-8ffe-92644c5820c4"],
+Cell[4603, 118, 37291, 1115, 401, "Output",ExpressionUUID->"22fd3ffd-9534-42b2-8e76-4105e04e17f1"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
